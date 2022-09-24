@@ -6,21 +6,21 @@ metadata:
     {{- include "switcher-api.labels" . | nindent 4 }}
 data:
   # Global settings
-  SWITCHER_API_LOGGER: {{ default 'false' .Values.api.env.switcherApiLogger }}
-  HISTORY_ACTIVATED: {{ default 'true' .Values.api.env.historyActivated }}
-  METRICS_ACTIVATED: {{ default 'true' .Values.api.env.metricsActivated }}
-  METRICS_MAX_PAGE: {{ default 50 .Values.api.env.metricsMaxPage }}
-  MAX_STRATEGY_OPERATION: {{ default 100 .Values.api.env.strategyMaxOperation }}
-  GOOGLE_SKIP_AUTH: {{ default 'true' .Values.api.env.googleSkipAuth }}
-  JWT_ADMIN_TOKEN_RENEW_INTERVAL: {{ default 5m .Values.api.env.jwtAdminTokenRenewInterval }}
-  JWT_CLIENT_TOKEN_EXP_TIME: {{ default 5m .Values.api.env.jwtClientTokenExpTime }}
+  SWITCHER_API_LOGGER: "{{ default false .Values.api.env.switcherApiLogger }}"
+  HISTORY_ACTIVATED: "{{ default true .Values.api.env.historyActivated }}"
+  METRICS_ACTIVATED: "{{ default true .Values.api.env.metricsActivated }}"
+  METRICS_MAX_PAGE: "{{ default 50 .Values.api.env.metricsMaxPage }}"
+  MAX_STRATEGY_OPERATION: "{{ default 100 .Values.api.env.strategyMaxOperation }}"
+  GOOGLE_SKIP_AUTH: "{{ default true .Values.api.env.googleSkipAuth }}"
+  JWT_ADMIN_TOKEN_RENEW_INTERVAL: "{{ default "5m" .Values.api.env.jwtAdminTokenRenewInterval }}"
+  JWT_CLIENT_TOKEN_EXP_TIME: "{{ default "5m" .Values.api.env.jwtClientTokenExpTime }}"
 
   # Auth Integration 
-  BITBUCKET_OAUTH_CLIENT_ID: {{ default '' .Values.api.env.bitbucketClientId }}
-  GIT_OAUTH_CLIENT_ID: {{ default '' .Values.api.env.githubClientId }}
+  BITBUCKET_OAUTH_CLIENT_ID: "{{ default "" .Values.api.env.bitbucketClientId }}"
+  GIT_OAUTH_CLIENT_ID: "{{ default "" .Values.api.env.githubClientId }}"
 
-  JWT_SECRET: {{ .Values.api.env.jwtSecret }}
-  RESOURCE_SECRET: {{ default admin .Values.api.env.resourceSecret }}
+  JWT_SECRET: {{ randAlphaNum 16 | quote }}
+  RESOURCE_SECRET: "{{ default "admin" .Values.api.env.resourceSecret }}"
   MONGODB_URI: {{ .Values.api.env.mongoUri }}
   GOOGLE_RECAPTCHA_SECRET: {{ .Values.api.env.googleRecaptchaSecret }}
   GIT_OAUTH_SECRET: {{ .Values.api.env.githubClientSecret }}

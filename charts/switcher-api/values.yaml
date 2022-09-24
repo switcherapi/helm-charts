@@ -7,15 +7,14 @@ api:
   port: 3000
 
   env:
-    jwtSecret: {{ randAlphaNum 16 | quote }}
     resourceSecret: admin
-    mongUri: mongodb://mongodb:27017/switcher-api
+    mongoUri: mongodb://my-release-mongodb.default.svc.cluster.local:27017/switcher-api
 
   image:
     repository: trackerforce/switcher-api
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: "latest"
 
   envFrom:
   - configMapRef:

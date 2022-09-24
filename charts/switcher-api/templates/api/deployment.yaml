@@ -42,10 +42,10 @@ spec:
             {{- toYaml .Values.api.resources | nindent 12 }}
           env:
           - name: PORT
-            value: {{ .Values.api.port }}
+            value: "{{ .Values.api.port }}"
           envFrom:
             {{- with .Values.api.envFrom }}
-              {{- toYaml . | nindent 8 }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
       {{- with .Values.api.nodeSelector }}
       nodeSelector:
