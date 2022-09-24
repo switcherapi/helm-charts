@@ -20,8 +20,18 @@
 [Helm](https://helm.sh) must be installed to use the charts.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-Once Helm is set up properly, add the repo as follows:
+Once Helm is set up properly, follow the steps below:
 
+> Install MongoDB
+```console
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install db bitnami/mongodb \
+    --namespace=switcherapi --create-namespace
+```
+
+> Install Switcher API
 ```console
 helm repo add switcherapi https://switcherapi.github.io/helm-charts
+helm install switcherapi helm-charts/switcher-api \
+    --namespace=switcherapi --create-namespace
 ```

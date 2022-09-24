@@ -8,7 +8,7 @@ api:
 
   env:
     resourceSecret: admin
-    mongoUri: mongodb://my-release-mongodb.default.svc.cluster.local:27017/switcher-api
+    mongoUri: mongodb://db-mongodb.switcherapi.svc.cluster.local:27017/switcher-api
 
   image:
     repository: trackerforce/switcher-api
