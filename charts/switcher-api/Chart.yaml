@@ -4,5 +4,5 @@ description: A Switcher API Helm chart for Kubernetes
 icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
 
 type: application
-version: 1.0.0
+version: 1.0.0-SNAPSHOT
 appVersion: "1.2.6"
