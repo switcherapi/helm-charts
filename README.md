@@ -16,7 +16,7 @@
 
 # Switcher API Helm Chart
 
-`helm-charts/switcher-api` enabled you to deploy in your K8s environment Switcher Management and Switcher API.
+Deploy Switcher API and Switcher Management using `helm-charts/switcher-api` Helm Chart.
 
 ## Usage
 
@@ -102,5 +102,7 @@ kubectl -n switcherapi port-forward svc/switcherapi-switcher-management 8080:808
 ```
 
 # Switcher Slack App Helm Chart
+
+Deploy Switcher Slack App using `helm-charts/switcher-slack-app` Helm Chart.
 
 > TBD
