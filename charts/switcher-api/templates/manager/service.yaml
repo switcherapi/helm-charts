@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "switcher-management.fullname" . }}
+  labels:
+    {{- include "switcher-management.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.management.service.type }}
+  ports:
+    - port: {{ .Values.management.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "switcher-management.selectorLabels" . | nindent 4 }}
