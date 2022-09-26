@@ -3,6 +3,17 @@ entries:
   switcher-api:
   - apiVersion: v2
     appVersion: 1.2.6
+    created: "2022-09-26T01:09:44.927287745Z"
+    description: A Switcher API Helm chart for Kubernetes
+    digest: 59d714df4b6e542beeab4ce78187c3da2bde653b9a3358afa29ddc7cfc89525e
+    icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
+    name: switcher-api
+    type: application
+    urls:
+    - https://github.com/switcherapi/helm-charts/releases/download/switcher-api-1.0.2/switcher-api-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 1.2.6
     created: "2022-09-24T18:47:47.420923137Z"
     description: A Switcher API Helm chart for Kubernetes
     digest: 4badb947dd7b5b1fddf6097b3832173dd79d6b1dda11ce502a1951e8b5ed4c13
@@ -12,4 +23,4 @@ entries:
     urls:
     - https://github.com/switcherapi/helm-charts/releases/download/switcher-api-1.0.0-SNAPSHOT/switcher-api-1.0.0-SNAPSHOT.tgz
     version: 1.0.0-SNAPSHOT
-generated: "2022-09-24T18:47:47.420928037Z"
+generated: "2022-09-26T01:09:44.927298045Z"
