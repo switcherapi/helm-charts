@@ -95,14 +95,55 @@ helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-ap
     --namespace=switcherapi --create-namespace
 ```
 
-Use port-forward to access the Switcher Management and expose Switcher API
-```console
-kubectl -n switcherapi port-forward svc/switcherapi-switcher-api 3000:3000 & \
-kubectl -n switcherapi port-forward svc/switcherapi-switcher-management 8080:8080 &
-```
-
 # Switcher Slack App Helm Chart
 
 Deploy Switcher Slack App using `helm-charts/switcher-slack-app` Helm Chart.
 
-> TBD
+## Usage
+
+Follow the [Switcher Slack App instructions](https://github.com/switcherapi/switcher-slack-app#create-slack-app) to create a Slack App before installing this Chart.
+
+> Install Switcher Slack App
+```console
+helm repo add switcherapi https://switcherapi.github.io/helm-charts
+helm install switcherslackapp helm-charts/switcher-slack-app \
+    --namespace=switcherapi --create-namespace \
+    --set app.env.slackClientId="" \
+    --set app.env.switcherManagementUrl="" \
+    --set app.env.switcherAPIUrl="" \
+    --set app.env.slackSigningSecret="" \
+    --set app.env.slackClientSecret=""
+```
+
+> Uninstall Switcher Slack App
+```console
+helm uninstall switcherslackapp --namespace switcherapi
+```
+
+### App parameters
+
+| Name                       | Description                                    | Value                  |
+| -------------------------- | ---------------------------------------------- | ---------------------- |
+| `app.image.tag`            | Switcher Slack App Image tag                   | `latest`               |
+| `app.service.port`         | App Service port                               | 5000                   |
+
+| Name                              | Description                                    | Value                  |
+| --------------------------------- | ---------------------------------------------- | ---------------------- |
+| `app.env.slackClientId`           | Slack Client Id                                | ``                     |
+| `app.env.switcherManagementUrl`   | Switcher Management URL for callback auth      | ``                     |
+| `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
+| `app.env.slackSigningSecret`      | Slack Signing Secret                           | ``                     |
+| `app.env.slackClientSecret`       | Slack Client Secret                            | ``                     |
+
+## Local
+
+Validate Chart from local Values
+```console
+helm install -f charts/switcher-slack-app/values.yaml switcherslackapp ./charts/switcher-slack-app/ \
+    --namespace=switcherapi --create-namespace \
+    --set app.env.slackClientId="[CHANGE_ME]" \
+    --set app.env.switcherManagementUrl="https://cloud.switcherapi.com" \
+    --set app.env.switcherAPIUrl="https://switcherapi.com/api" \
+    --set app.env.slackSigningSecret="[CHANGE_ME]" \
+    --set app.env.slackClientSecret="[CHANGE_ME]"
+```

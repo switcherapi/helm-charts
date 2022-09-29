@@ -51,17 +51,6 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
-*/}}
-{{- define "switcher-api.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "switcher-api.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
 Expand the name of the chart.
 */}}
 {{- define "switcher-management.name" -}}
@@ -111,15 +100,4 @@ Selector labels
 {{- define "switcher-management.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "switcher-management.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "switcher-management.serviceAccountName" -}}
-{{- if .Values.management.serviceAccount.create }}
-{{- default (include "switcher-management.fullname" .) .Values.management.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.management.serviceAccount.name }}
-{{- end }}
 {{- end }}
