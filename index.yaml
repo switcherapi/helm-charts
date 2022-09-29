@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   switcher-api:
   - apiVersion: v2
+    appVersion: latest
+    created: "2022-09-29T04:43:33.848276941Z"
+    description: A Switcher API Helm chart for Kubernetes
+    digest: 085df6913f443bdb050ae06c25a60b6257930820532e5c33eb66e4a6203c8a5c
+    home: https://github.com/switcherapi/helm-charts
+    icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
+    name: switcher-api
+    type: application
+    urls:
+    - https://github.com/switcherapi/helm-charts/releases/download/switcher-api-1.0.3/switcher-api-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     appVersion: 1.2.6
     created: "2022-09-26T01:09:44.927287745Z"
     description: A Switcher API Helm chart for Kubernetes
@@ -23,4 +35,17 @@ entries:
     urls:
     - https://github.com/switcherapi/helm-charts/releases/download/switcher-api-1.0.0-SNAPSHOT/switcher-api-1.0.0-SNAPSHOT.tgz
     version: 1.0.0-SNAPSHOT
-generated: "2022-09-26T01:09:44.927298045Z"
+  switcher-slack-app:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-09-29T04:43:33.998367777Z"
+    description: A Switcher Slack App Helm chart for Kubernetes
+    digest: 91873a655447287377ddd96b05d3d370dd52b7822531f21bedc4e2bcf1e023ca
+    home: https://github.com/switcherapi/helm-charts
+    icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
+    name: switcher-slack-app
+    type: application
+    urls:
+    - https://github.com/switcherapi/helm-charts/releases/download/switcher-slack-app-1.0.0/switcher-slack-app-1.0.0.tgz
+    version: 1.0.0
+generated: "2022-09-29T04:43:33.998385977Z"
