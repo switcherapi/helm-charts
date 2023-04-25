@@ -3,7 +3,7 @@ Looks good! To access Switcher API, follow the 3 steps below:
 1. Port-forward UI and API services:
 
     kubectl -n {{ .Release.Namespace }} port-forward svc/{{include "switcher-api.fullname" . }} 3000:{{ .Values.api.service.port }} & \
-    kubectl -n {{ .Release.Namespace }} port-forward svc/{{include "switcher-management.fullname" . }} 8080:{{ .Values.api.service.port }} &
+    kubectl -n {{ .Release.Namespace }} port-forward svc/{{include "switcher-management.fullname" . }} 8080:{{ .Values.management.service.port }} &
 
 2. Access UI:
 

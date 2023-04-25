@@ -14,9 +14,9 @@
 
 ***
 
-# Switcher API Helm Chart
+# Switcher API Helm Charts
 
-Deploy Switcher API and Switcher Management using `helm-charts/switcher-api` Helm Chart.
+Deploy Switcher API and Switcher Management using `switcherapi/switcher-api` Helm Charts.
 
 ## Usage
 
@@ -36,7 +36,7 @@ helm install db bitnami/mongodb \
 > Install Switcher API
 ```console
 helm repo add switcherapi https://switcherapi.github.io/helm-charts
-helm install switcherapi helm-charts/switcher-api \
+helm install switcherapi switcherapi/switcher-api \
     --namespace=switcherapi --create-namespace
 ```
 
@@ -95,9 +95,9 @@ helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-ap
     --namespace=switcherapi --create-namespace
 ```
 
-# Switcher Slack App Helm Chart
+# Switcher Slack App Helm Charts
 
-Deploy Switcher Slack App using `helm-charts/switcher-slack-app` Helm Chart.
+Deploy Switcher Slack App using `switcherapi/switcher-slack-app` Helm Charts.
 
 ## Usage
 
@@ -106,7 +106,7 @@ Follow the [Switcher Slack App instructions](https://github.com/switcherapi/swit
 > Install Switcher Slack App
 ```console
 helm repo add switcherapi https://switcherapi.github.io/helm-charts
-helm install switcherslackapp helm-charts/switcher-slack-app \
+helm install switcherslackapp switcherapi/switcher-slack-app \
     --namespace=switcherapi --create-namespace \
     --set app.env.slackClientId="" \
     --set app.env.switcherManagementUrl="" \
