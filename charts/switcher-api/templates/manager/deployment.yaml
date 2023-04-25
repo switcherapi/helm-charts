@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "switcher-management.fullname" . }}
+  labels:
+    {{- include "switcher-management.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.management.autoscaling.enabled }}
+  replicas: {{ .Values.management.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "switcher-management.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.management.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "switcher-management.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.management.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.management.securityContext | nindent 12 }}
+          image: "{{ .Values.management.image.repository }}:{{ .Values.management.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.management.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.management.port }}
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.management.resources | nindent 12 }}
+          envFrom:
+            {{- with .Values.management.envFrom }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+      {{- with .Values.management.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.management.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.management.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: switcher-management
+  labels:
+    {{- include "switcher-management.labels" . | nindent 4 }}
+data:
+  SWITCHERAPI_URL: {{ .Values.management.env.switcherApiUrl }}
+  SM_IP: {{ .Values.management.env.switcherManagementUrl }}
+  GOOGLE_RECAPTCHA: {{ .Values.management.env.googleRecaptcha }}
+  GITHUB_CLIENTID: {{ .Values.management.env.githubClientId }}
+  BITBUCKET_CLIENTID: {{ .Values.management.env.bitbucketClientId }}
+  SWITCHERSLACKAPP_URL: "{{ .Values.management.env.switcherSlackUrl }}/slack/install"

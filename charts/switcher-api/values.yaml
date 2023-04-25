@@ -1,19 +1,17 @@
-
 api:
-  # Default values for switcher-api.
-  # This is a YAML-formatted file.
-  # Declare variables to be passed into your templates.
   replicaCount: 1
   port: 3000
 
   env:
-    resourceSecret: admin
     mongoUri: mongodb://db-mongodb.switcherapi.svc.cluster.local:27017/switcher-api
+    switcherApiLogger: true
+    historyActivated: true
+    metricsActivated: true
+    googleSkipAuth: true
 
   image:
     repository: trackerforce/switcher-api
     pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
 
   envFrom:
@@ -50,7 +48,56 @@ api:
     # targetMemoryUtilizationPercentage: 80
 
   nodeSelector: {}
-
   tolerations: []
+  affinity: {}
 
+management:
+  replicaCount: 1
+  port: 80
+
+  env:
+    switcherApiUrl: "http://127.0.0.1:3000"
+    switcherManagementUrl: "http://127.0.0.1:8080"
+    switcherSlackUrl: "http://127.0.0.1:3000"
+
+  image:
+    repository: trackerforce/switcher-management
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+  envFrom:
+  - configMapRef:
+      name: switcher-management
+
+  imagePullSecrets: []
+  nameOverride: "switcher-management"
+  fullnameOverride: ""
+
+  podAnnotations: {}
+  
+  service:
+    type: ClusterIP
+    port: 8080
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+  tolerations: []
   affinity: {}
