@@ -30,7 +30,6 @@ app:
   fullnameOverride: ""
 
   podAnnotations: {}
-
   service:
     type: ClusterIP
     port: 5000
