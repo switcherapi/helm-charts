@@ -61,6 +61,8 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.googleSkipAuth`      | Skip Google ReCaptcha validation               | true                   |
 | `api.env.metricsMaxPage`      | Metrics: max logs per page                     | 50                     |
 | `api.env.strategyMaxOperation`| Strategy: max operation entries                | 100                    |
+| `api.env.regexMaxTimeout`     | Regex Validator: max timeout in ms             | 3000                   |
+| `api.env.regexMaxBlacklist`   | Regex Validator: max blacklist entries         | 50                     |
 | `api.env.jwtAdminTokenRenewInterval`      | User token renew interval                      | `5m`                   |
 | `api.env.jwtClientTokenExpTime`           | Component token renew interval                 | `5m`                   |
 | `api.env.mongoUri`                        | API Database URI                               | < see values.yml >     |
