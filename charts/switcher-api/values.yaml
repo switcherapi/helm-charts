@@ -23,7 +23,7 @@ api:
   fullnameOverride: ""
 
   podAnnotations: {}
-  
+
   service:
     type: ClusterIP
     port: 3000
@@ -74,7 +74,7 @@ management:
   fullnameOverride: ""
 
   podAnnotations: {}
-  
+
   service:
     type: ClusterIP
     port: 8080
