@@ -5,14 +5,10 @@ metadata:
   labels:
     {{- include "switcher-slack-app.labels" . | nindent 4 }}
 data:
-  SLACK_CLIENT_ID: {{ .Values.app.env.slackClientId | quote }}
+  SLACK_CLIENT_ID: {{ default "[CHANGE_ME]" .Values.app.env.slackClientId | quote }}
   SWITCHER_URL: {{ .Values.app.env.switcherManagementUrl | quote }}
   SWITCHER_API_URL: {{ .Values.app.env.switcherAPIUrl | quote }}
 
-  {{ if .Values.app.env.slackSigningSecret }}
-  SLACK_SIGNING_SECRET: {{ .Values.app.env.slackSigningSecret | quote }}
-  {{ end }}
-  {{ if .Values.app.env.slackClientSecret }}
-  SLACK_CLIENT_SECRET: {{ .Values.app.env.slackClientSecret | quote }}
-  {{ end }}
+  SLACK_SIGNING_SECRET: {{ default "[CHANGE_ME]" .Values.app.env.slackSigningSecret | quote }}
+  SLACK_CLIENT_SECRET: {{ default "[CHANGE_ME]" .Values.app.env.slackClientSecret | quote }}
   SWITCHER_JWT_SECRET: {{ randAlphaNum 16 | quote }}
