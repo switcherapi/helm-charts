@@ -3,6 +3,22 @@ entries:
   switcher-api:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-05-14T00:53:40.447408595Z"
+    description: A Switcher API Helm chart for Kubernetes
+    digest: daf81322e56a5f862481f06e324541b890d96922e1aaa3db013b2d24a63d9237
+    home: https://github.com/switcherapi/helm-charts
+    icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
+    maintainers:
+    - email: switcher.project@gmail.com
+      name: petruki
+      url: https://github.com/petruki
+    name: switcher-api
+    type: application
+    urls:
+    - https://github.com/switcherapi/helm-charts/releases/download/switcher-api-1.0.6/switcher-api-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
+    appVersion: latest
     created: "2023-04-26T04:03:42.281254617Z"
     description: A Switcher API Helm chart for Kubernetes
     digest: 13c17daca81696e525831725e1fea493daf1f4b039116d109262e4be6ad26557
@@ -62,6 +78,22 @@ entries:
   switcher-slack-app:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-05-14T00:53:40.606780968Z"
+    description: A Switcher Slack App Helm chart for Kubernetes
+    digest: 3db49bcb40ac4b6218807a0cc10dc2f6d15632dd95a554ef615f07409f62fe1d
+    home: https://github.com/switcherapi/helm-charts
+    icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
+    maintainers:
+    - email: switcher.project@gmail.com
+      name: petruki
+      url: https://github.com/petruki
+    name: switcher-slack-app
+    type: application
+    urls:
+    - https://github.com/switcherapi/helm-charts/releases/download/switcher-slack-app-1.0.2/switcher-slack-app-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: latest
     created: "2023-04-25T02:00:49.147733266Z"
     description: A Switcher Slack App Helm chart for Kubernetes
     digest: a02b0da89a80c5e338276149079076e7ce39d4f584015fe11d113938a179910c
@@ -84,4 +116,4 @@ entries:
     urls:
     - https://github.com/switcherapi/helm-charts/releases/download/switcher-slack-app-1.0.0/switcher-slack-app-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-26T04:03:42.281282117Z"
+generated: "2023-05-14T00:53:40.606836376Z"
