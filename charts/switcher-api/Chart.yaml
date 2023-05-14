@@ -3,6 +3,10 @@ name: switcher-api
 home: https://github.com/switcherapi/helm-charts
 description: A Switcher API Helm chart for Kubernetes
 icon: https://raw.githubusercontent.com/switcherapi/switcherapi-assets/master/logo/switcher_mark_grey.png
+maintainers:
+  - name: Roger Floriano (petruki)
+    email: switcher.project@gmail.com
+    url: https://github.com/petruki
 
 type: application
 version: 1.0.6
