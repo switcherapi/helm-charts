@@ -12,6 +12,8 @@ data:
   GOOGLE_SKIP_AUTH: {{ .Values.api.env.googleSkipAuth | quote }}
   METRICS_MAX_PAGE: {{ default 50 .Values.api.env.metricsMaxPage | quote }}
   MAX_STRATEGY_OPERATION: {{ default 100 .Values.api.env.strategyMaxOperation | quote }}
+  RELAY_BYPASS_HTTPS: {{ .Values.api.env.relayBypassHttps | quote }}
+  RELAY_BYPASS_VERIFICATION: {{ .Values.api.env.relayBypassVerification | quote }}
   REGEX_MAX_TIMEOUT: {{ default 3000 .Values.api.env.regexMaxTimeout | quote }}
   REGEX_MAX_BLACLIST: {{ default 50 .Values.api.env.regexMaxBlacklist | quote }}
   JWT_ADMIN_TOKEN_RENEW_INTERVAL: {{ default "5m" .Values.api.env.jwtAdminTokenRenewInterval | quote }}
