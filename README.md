@@ -65,6 +65,7 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.relayBypassVerification` | Relay: Bypass Verification                 | false                  |
 | `api.env.regexMaxTimeout`     | Regex Validator: max timeout in ms             | 3000                   |
 | `api.env.regexMaxBlacklist`   | Regex Validator: max blacklist entries         | 50                     |
+| `api.env.maxRequestPerMinute` | API max Request per minute                     | 0 (unlimited)          |
 | `api.env.jwtAdminTokenRenewInterval`      | User token renew interval                      | `5m`                   |
 | `api.env.jwtClientTokenExpTime`           | Component token renew interval                 | `5m`                   |
 | `api.env.mongoUri`                        | API Database URI                               | < see values.yml >     |
