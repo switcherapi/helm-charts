@@ -30,7 +30,7 @@ spec:
             {{- toYaml .Values.app.securityContext | nindent 12 }}
           image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.app.image.pullPolicy }}
-          command: ["gunicorn", "--bind", "0.0.0.0:{{ .Values.app.port }}", "--chdir", "src", "app:flask_app"]
+          command: ["gunicorn", "--bind", "0.0.0.0:{{ .Values.app.port }}", "--chdir", "/home/app", "app:flask_app"]
           ports:
             - name: http
               containerPort: {{ .Values.app.port }}
