@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "switcher-management.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  name: switcher-management
   labels:
     {{- include "switcher-management.labels" . | nindent 4 }}
 spec:
