@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "switcher-api.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  name: switcher-api
   labels:
     {{- include "switcher-api.labels" . | nindent 4 }}
 spec:

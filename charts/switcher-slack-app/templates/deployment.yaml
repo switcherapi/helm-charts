@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "switcher-slack-app.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  name: switcher-slack-app
   labels:
     {{- include "switcher-slack-app.labels" . | nindent 4 }}
 spec:
