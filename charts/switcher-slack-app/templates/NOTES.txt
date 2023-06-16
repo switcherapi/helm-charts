@@ -3,7 +3,7 @@ Test the installation with the steps below:
 
 1. Port-forward UI and App service:
 
-    kubectl -n {{ .Release.Namespace }} port-forward svc/{{include "switcher-slack-app.fullname" . }} 5000:{{ .Values.app.service.port }} &
+    kubectl -n {{ .Release.Namespace }} port-forward svc/switcher-slack-app 5000:{{ .Values.app.service.port }} &
 
 2. Check pod health:
 

@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: {{ .Release.Namespace }}
   name: switcher-management
   labels:
     {{- include "switcher-management.labels" . | nindent 4 }}
