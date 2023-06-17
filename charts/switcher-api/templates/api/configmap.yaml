@@ -20,24 +20,11 @@ data:
   MAX_REQUEST_PER_MINUTE: {{ default 0 .Values.api.env.maxRequestPerMinute | quote }}
   JWT_ADMIN_TOKEN_RENEW_INTERVAL: {{ default "5m" .Values.api.env.jwtAdminTokenRenewInterval | quote }}
   JWT_CLIENT_TOKEN_EXP_TIME: {{ default "5m" .Values.api.env.jwtClientTokenExpTime | quote }}
-  JWT_SECRET: {{ randAlphaNum 16 | quote }}
-  RESOURCE_SECRET: {{ default "admin" .Values.api.env.resourceSecret | quote }}
-  MONGODB_URI: {{ .Values.api.env.mongoUri }}
 
   # Auth Integration 
   {{- if and .Values.api.env.bitbucketClientId .Values.api.env.bitbucketClientSecret -}}
   BITBUCKET_OAUTH_CLIENT_ID: {{ .Values.api.env.bitbucketClientId | quote }}
-  BITBUCKET_OAUTH_SECRET: {{ .Values.api.env.bitbucketClientSecret | quote }}
   {{- end -}}
   {{- if and .Values.api.env.githubClientId .Values.api.env.githubClientSecret -}}
   GIT_OAUTH_CLIENT_ID: {{ .Values.api.env.githubClientId | quote }}
-  GIT_OAUTH_SECRET: {{ .Values.api.env.githubClientSecret | quote }}
-  {{- end -}}
-
-  # Platform/Services Integration
-  {{- if .Values.api.env.googleRecaptchaSecret -}}
-  GOOGLE_RECAPTCHA_SECRET: {{ .Values.api.env.googleRecaptchaSecret | quote }}
-  {{- end -}}
-  {{- if .Values.api.env.switcherSlackJwtSecret -}}
-  SWITCHER_SLACK_JWT_SECRET: {{ .Values.api.env.switcherSlackJwtSecret | quote }}
   {{- end -}}
