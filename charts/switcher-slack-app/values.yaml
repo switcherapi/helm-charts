@@ -15,6 +15,8 @@ app:
   envFrom:
   - configMapRef:
       name: switcher-slack-app
+  - secretRef:
+      name: switcher-slack-app
 
   imagePullSecrets: []
   nameOverride: ""
