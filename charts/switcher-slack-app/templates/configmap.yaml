@@ -9,7 +9,3 @@ data:
   SLACK_CLIENT_ID: {{ default "[CHANGE_ME]" .Values.app.env.slackClientId | quote }}
   SWITCHER_URL: {{ .Values.app.env.switcherManagementUrl | quote }}
   SWITCHER_API_URL: {{ .Values.app.env.switcherAPIUrl | quote }}
-
-  SLACK_SIGNING_SECRET: {{ default "[CHANGE_ME]" .Values.app.env.slackSigningSecret | quote }}
-  SLACK_CLIENT_SECRET: {{ default "[CHANGE_ME]" .Values.app.env.slackClientSecret | quote }}
-  SWITCHER_JWT_SECRET: {{ randAlphaNum 16 | quote }}

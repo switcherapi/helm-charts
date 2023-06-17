@@ -17,6 +17,8 @@ api:
   envFrom:
   - configMapRef:
       name: switcher-api
+  - secretRef:
+      name: switcher-api
 
   imagePullSecrets: []
   nameOverride: ""
