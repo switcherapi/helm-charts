@@ -6,6 +6,7 @@ app:
     slackClientId: ""
     switcherManagementUrl: "https://cloud.switcherapi.com"
     switcherAPIUrl: "https://switcherapi.com/api"
+    sslSecretName: ""
 
   image:
     repository: trackerforce/switcher-slack-app

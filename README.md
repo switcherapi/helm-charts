@@ -54,6 +54,7 @@ helm uninstall switcherapi --namespace switcherapi
 
 | Name                          | Description                                    | Value                  |
 | ----------------------------- | ---------------------------------------------- | ---------------------- |
+| `api.env.sslSecretName`       | API SSL Secret Name (enable HTTPS)             | ``                     |
 | `api.env.resourceSecret`      | API Swagger (user: admin)                      | `admin`                |
 | `api.env.switcherApiLogger`   | API log                                        | true                   |
 | `api.env.historyActivated`    | API Change Log record                          | true                   |
@@ -69,12 +70,12 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.jwtAdminTokenRenewInterval`      | User token renew interval                      | `5m`                   |
 | `api.env.jwtClientTokenExpTime`           | Component token renew interval                 | `5m`                   |
 | `api.env.mongoUri`                        | API Database URI                               | < see values.yml >     |
-| `api.env.bitbucketClientId`     | Bitbucket Client Id               | ''                    |
-| `api.env.bitbucketClientSecret` | Bitbucket Client Secret           | ''                    |
-| `api.env.githubClientId`        | GitHub Client Id                  | ''                    |
-| `api.env.githubClientSecret`    | GitHub Client Secret              | ''                    |
-| `api.env.googleRecaptchaSecret` | Google ReCaptcha Secret           | ''                    |
-| `api.env.switcherSlackJwtSecret`| Switcher Slack Secret             | ''                    |
+| `api.env.bitbucketClientId`     | Bitbucket Client Id               | ``                    |
+| `api.env.bitbucketClientSecret` | Bitbucket Client Secret           | ``                    |
+| `api.env.githubClientId`        | GitHub Client Id                  | ``                    |
+| `api.env.githubClientSecret`    | GitHub Client Secret              | ``                    |
+| `api.env.googleRecaptchaSecret` | Google ReCaptcha Secret           | ``                    |
+| `api.env.switcherSlackJwtSecret`| Switcher Slack Secret             | ``                    |
 
 ### Management parameters
 
@@ -85,12 +86,12 @@ helm uninstall switcherapi --namespace switcherapi
 
 | Name                                  | Description                                    | Value                     |
 | ------------------------------------- | ---------------------------------------------- | ------------------------- |
-| `management.env.switcherApiUrl`       | Switcher API URI                               | `http://127.0.0.1:3000`   |
-| `management.env.switcherManagementUrl`| Management callback URI                        | `http://127.0.0.1:8080`   |
-| `management.env.googleRecaptcha`      | Google ReCaptcha Public Key                    | ''                        |
-| `management.env.bitbucketClientId`    | Bitbucket Client Id                            | ''                        |
-| `management.env.githubClientId`       | GitHub Client Id                               | ''                        |
-| `management.env.switcherSlackUrl`     | Switcher Slack App URL                         | ''                        |
+| `management.env.switcherApiUrl`       | Switcher API URL                               | `http://localhost:3000`   |
+| `management.env.switcherManagementUrl`| Management callback URL                        | `http://localhost:8080`   |
+| `management.env.switcherSlackUrl`     | Switcher Slack App URL                         | `http://localhost:5000`   |
+| `management.env.googleRecaptcha`      | Google ReCaptcha Public Key                    | ``                        |
+| `management.env.bitbucketClientId`    | Bitbucket Client Id                            | ``                        |
+| `management.env.githubClientId`       | GitHub Client Id                               | ``                        |
 
 ## Local
 
@@ -98,6 +99,15 @@ Validate Chart from local Values
 ```console
 helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-api/ \
     --namespace=switcherapi --create-namespace
+```
+
+SSL Enabled
+```console
+helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-api/ \
+    --namespace=switcherapi --create-namespace \
+    --set api.env.sslSecretName="[CHANGE_ME]" \
+    --set management.env.switcherApiUrl="https://localhost:3000" \
+    --set management.env.switcherManagementUrl="https://localhost:8080"
 ```
 
 # Switcher Slack App Helm Charts
@@ -139,6 +149,7 @@ helm uninstall switcherslackapp --namespace switcherapi
 | `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
 | `app.env.slackSigningSecret`      | Slack Signing Secret                           | ``                     |
 | `app.env.slackClientSecret`       | Slack Client Secret                            | ``                     |
+| `app.env.sslSecretName`           | App SSL Secret Name (enable HTTPS)             | ``                     |
 
 ## Local
 
