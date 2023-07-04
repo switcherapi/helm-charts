@@ -21,6 +21,12 @@ spec:
       labels:
         {{- include "switcher-management.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.api.env.sslSecretName }}
+      volumes:
+        - name: secret-tls
+          secret:
+            secretName: {{ .Values.api.env.sslSecretName }}
+      {{- end }}
       {{- with .Values.management.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -30,21 +36,41 @@ spec:
           securityContext:
             {{- toYaml .Values.management.securityContext | nindent 12 }}
           image: "{{ .Values.management.image.repository }}:{{ .Values.management.image.tag | default .Chart.AppVersion }}"
+          {{- if .Values.api.env.sslSecretName }}
+          command: ["/bin/sh", "-c", "./setup.sh true"]
+          {{- else }}
+          command: ["/bin/sh", "-c", "./setup.sh false"]
+          {{- end }}
           imagePullPolicy: {{ .Values.management.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.management.port }}
               protocol: TCP
+            - name: https
+              containerPort: {{ .Values.management.portTls }}
+              protocol: TCP
           readinessProbe:
             httpGet:
               path: /
+              {{- if .Values.api.env.sslSecretName }}
+              port: https
+              scheme: HTTPS
+              {{- else }}
               port: http
+              scheme: HTTP
+              {{- end }}
           resources:
             {{- toYaml .Values.management.resources | nindent 12 }}
           envFrom:
             {{- with .Values.management.envFrom }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- if .Values.api.env.sslSecretName }}
+          volumeMounts:
+            - name: secret-tls
+              mountPath: /etc/nginx/conf.d
+              readOnly: true
+          {{- end }}
       {{- with .Values.management.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

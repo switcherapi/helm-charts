@@ -6,6 +6,12 @@ metadata:
   labels:
     {{- include "switcher-api.labels" . | nindent 4 }}
 data:
+  # SSL settings
+  {{- if .Values.api.env.sslSecretName }}
+  SSL_CERT: "/etc/certs/tls.crt"
+  SSL_KEY: "/etc/certs/tls.key"
+  {{- end -}}
+
   # Global settings
   SWITCHER_API_LOGGER: {{ .Values.api.env.switcherApiLogger | quote }}
   HISTORY_ACTIVATED: {{ .Values.api.env.historyActivated | quote }}
