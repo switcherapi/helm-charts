@@ -21,6 +21,12 @@ spec:
       labels:
         {{- include "switcher-slack-app.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.app.env.sslSecretName }}
+      volumes:
+        - name: secret-tls
+          secret:
+            secretName: {{ .Values.app.env.sslSecretName }}
+      {{- end }}
       {{- with .Values.app.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -31,7 +37,18 @@ spec:
             {{- toYaml .Values.app.securityContext | nindent 12 }}
           image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.app.image.pullPolicy }}
-          command: ["gunicorn", "--bind", "0.0.0.0:{{ .Values.app.port }}", "--chdir", "/home/app", "app:flask_app"]
+          {{- if .Values.app.env.sslSecretName }}
+          command: [
+            "gunicorn", 
+            "--certfile=/etc/certs/tls.crt", "--keyfile=/etc/certs/tls.key", 
+            "--bind", "0.0.0.0:{{ .Values.app.port }}", 
+            "--chdir", "/home/app", "app:flask_app"]
+          {{- else }}
+          command: [
+            "gunicorn", 
+            "--bind", "0.0.0.0:{{ .Values.app.port }}", 
+            "--chdir", "/home/app", "app:flask_app"]
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.app.port }}
@@ -40,12 +57,23 @@ spec:
             httpGet:
               path: /check
               port: http
+              {{- if .Values.app.env.sslSecretName }}
+              scheme: HTTPS
+              {{- else }}
+              scheme: HTTP
+              {{- end }}
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
           envFrom:
             {{- with .Values.app.envFrom }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- if .Values.app.env.sslSecretName }}
+          volumeMounts:
+            - name: secret-tls
+              mountPath: /etc/certs
+              readOnly: true
+          {{- end }}
       {{- with .Values.app.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

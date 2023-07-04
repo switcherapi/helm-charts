@@ -8,9 +8,13 @@ metadata:
 spec:
   type: {{ .Values.management.service.type }}
   ports:
-    - port: {{ .Values.management.service.port }}
+    - name: http
+      port: {{ .Values.management.service.port }}
       targetPort: http
       protocol: TCP
-      name: http
+    - name: https
+      protocol: TCP
+      port: {{ .Values.management.service.portTls }}
+      targetPort: {{ .Values.management.service.portTls }}
   selector:
     {{- include "switcher-management.selectorLabels" . | nindent 4 }}

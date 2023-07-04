@@ -9,6 +9,9 @@ api:
     metricsActivated: true
     googleSkipAuth: true
 
+    # Enable SSL (tls.crt and tls.key)
+    sslSecretName: ""
+
   image:
     repository: trackerforce/switcher-api
     pullPolicy: IfNotPresent
@@ -56,11 +59,12 @@ api:
 management:
   replicaCount: 1
   port: 80
+  portTls: 443
 
   env:
-    switcherApiUrl: "http://127.0.0.1:3000"
-    switcherManagementUrl: "http://127.0.0.1:8080"
-    switcherSlackUrl: "http://127.0.0.1:3000"
+    switcherApiUrl: "http://localhost:3000"
+    switcherManagementUrl: "http://localhost:8080"
+    switcherSlackUrl: "http://localhost:5000"
 
   image:
     repository: trackerforce/switcher-management
@@ -80,6 +84,7 @@ management:
   service:
     type: ClusterIP
     port: 8080
+    portTls: 443
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
