@@ -57,7 +57,11 @@ spec:
             httpGet:
               path: /check
               port: http
+              {{- if .Values.app.env.sslSecretName }}
               scheme: HTTPS
+              {{- else }}
+              scheme: HTTP
+              {{- end }}
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
           envFrom:
