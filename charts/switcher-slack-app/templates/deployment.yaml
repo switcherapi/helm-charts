@@ -44,7 +44,7 @@ spec:
             "--bind", "0.0.0.0:{{ .Values.app.port }}", 
             "--chdir", "/home/app", "app:flask_app"]
           {{- else }}
-          ommand: [
+          command: [
             "gunicorn", 
             "--bind", "0.0.0.0:{{ .Values.app.port }}", 
             "--chdir", "/home/app", "app:flask_app"]
