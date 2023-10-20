@@ -7,6 +7,7 @@ api:
     switcherApiLogger: true
     historyActivated: true
     metricsActivated: true
+    permissionCacheActivated: true
     googleSkipAuth: true
 
     # Enable SSL (tls.crt and tls.key)
