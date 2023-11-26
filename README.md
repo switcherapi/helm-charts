@@ -16,7 +16,7 @@
 
 # Switcher API Helm Charts
 
-Deploy Switcher API and Switcher Management using `switcherapi/switcher-api` Helm Charts.
+Deploy Switcher API using `switcherapi/switcher-api` Helm Charts.
 
 ## Usage
 
@@ -58,18 +58,18 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.resourceSecret`              | API Swagger (user: admin)                     | `admin`               |
 | `api.env.switcherApiLogger`           | API log                                       | true                  |
 | `api.env.historyActivated`            | API Change Log record                         | true                  |
-| `api.env.metricsActivated`            | API Metrics record                            | true                  |
+| `api.env.metricsActivated`            | (*) API Metrics record                        | true                  |
 | `api.env.permissionCacheActivated`    | API Permission Cache                          | true                  |
 | `api.env.googleSkipAuth`              | Skip Google ReCaptcha validation              | true                  |
 | `api.env.metricsMaxPage`              | Metrics: max logs per page                    | 50                    |
 | `api.env.strategyMaxOperation`        | Strategy: max operation entries               | 100                   |
 | `api.env.relayBypassHttps`            | Relay: Bypass HTTPS validation                | false                 |
 | `api.env.relayBypassVerification`     | Relay: Bypass Verification                    | false                 |
-| `api.env.regexMaxTimeout`             | Regex Validator: max timeout in ms            | 3000                  |
-| `api.env.regexMaxBlacklist`           | Regex Validator: max blacklist entries        | 50                    |
-| `api.env.maxRequestPerMinute`         | API max Request per minute                    | 0 (unlimited)         |
+| `api.env.regexMaxTimeout`             | (*) Regex Validator: max timeout in ms        | 3000                  |
+| `api.env.regexMaxBlacklist`           | (*) Regex Validator: max blacklist entries    | 50                    |
+| `api.env.maxRequestPerMinute`         | (*) API max Request per minute                | 0 (unlimited)         |
 | `api.env.jwtAdminTokenRenewInterval`  | User token renew interval                     | `5m`                  |
-| `api.env.jwtClientTokenExpTime`       | Component token renew interval                | `5m`                  |
+| `api.env.jwtClientTokenExpTime`       | (*) Component token renew interval            | `5m`                  |
 | `api.env.mongoUri`                    | API Database URI                              | < see values.yml >    |
 | `api.env.bitbucketClientId`           | Bitbucket Client Id                           | ``                    |
 | `api.env.bitbucketClientSecret`       | Bitbucket Client Secret                       | ``                    |
@@ -77,6 +77,29 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.githubClientSecret`          | GitHub Client Secret                          | ``                    |
 | `api.env.googleRecaptchaSecret`       | Google ReCaptcha Secret                       | ``                    |
 | `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
+
+(*) - Depracated parameters will be removed in future versions. Those are now managed by the Resolver API.
+
+### Resolver API parameters
+
+| Name                            | Description                                    | Value                  |
+| ------------------------------- | ---------------------------------------------- | ---------------------- |
+| `resolver.image.tag`            | Switcher Resolver Image tag                    | `latest`               |
+| `resolver.service.port`         | API Service port                               | 3001                   |
+
+| Name                                       | Description                                   | Value                 |
+| ------------------------------------------ | --------------------------------------------- | --------------------- |
+| `resolver.env.sslSecretName`               | API SSL Secret Name (enable HTTPS)            | ``                    |
+| `resolver.env.resourceSecret`              | API Swagger (user: admin)                     | `admin`               |
+| `resolver.env.switcherApiLogger`           | API log                                       | true                  |
+| `resolver.env.metricsActivated`            | API Metrics record                            | true                  |
+| `resolver.env.relayBypassHttps`            | Relay: Bypass HTTPS validation                | false                 |
+| `resolver.env.relayBypassVerification`     | Relay: Bypass Verification                    | false                 |
+| `resolver.env.regexMaxTimeout`             | Regex Validator: max timeout in ms            | 3000                  |
+| `resolver.env.regexMaxBlacklist`           | Regex Validator: max blacklist entries        | 50                    |
+| `resolver.env.maxRequestPerMinute`         | API max Request per minute                    | 0 (unlimited)         |
+| `resolver.env.jwtClientTokenExpTime`       | Component token renew interval                | `5m`                  |
+| `resolver.env.mongoUri`                    | API Database URI                              | < see values.yml >    |
 
 ### Management parameters
 
