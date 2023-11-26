@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: switcher-resolver
+  labels:
+    {{- include "switcher-resolver.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.resolver.autoscaling.enabled }}
+  replicas: {{ .Values.resolver.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "switcher-resolver.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.resolver.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "switcher-resolver.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.resolver.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.resolver.env.sslSecretName }}
+      volumes:
+        - name: secret-tls
+          secret:
+            secretName: {{ .Values.resolver.env.sslSecretName }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.resolver.securityContext | nindent 12 }}
+          image: "{{ .Values.resolver.image.repository }}:{{ .Values.resolver.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.resolver.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.resolver.port }}
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /check
+              port: http
+              {{- if .Values.resolver.env.sslSecretName }}
+              scheme: HTTPS
+              {{- else }}
+              scheme: HTTP
+              {{- end }}
+          resources:
+            {{- toYaml .Values.resolver.resources | nindent 12 }}
+          env:
+          - name: PORT
+            value: "{{ .Values.resolver.port }}"
+          envFrom:
+            {{- with .Values.resolver.envFrom }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- if .Values.resolver.env.sslSecretName }}
+          volumeMounts:
+            - name: secret-tls
+              mountPath: /etc/certs
+              readOnly: true
+          {{- end }}
+      {{- with .Values.resolver.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.resolver.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.resolver.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

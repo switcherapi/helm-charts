@@ -57,6 +57,62 @@ api:
   tolerations: []
   affinity: {}
 
+resolver:
+  replicaCount: 1
+  port: 3001
+
+  env:
+    mongoUri: mongodb://db-mongodb.switcherapi.svc.cluster.local:27017/switcher-api
+    switcherApiLogger: true
+    metricsActivated: true
+
+    # Enable SSL (tls.crt and tls.key)
+    sslSecretName: ""
+
+  image:
+    repository: trackerforce/switcher-resolver-node
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+  envFrom:
+  - configMapRef:
+      name: switcher-resolver
+  - secretRef:
+      name: switcher-resolver
+
+  imagePullSecrets: []
+  nameOverride: "switcher-resolver"
+  fullnameOverride: ""
+
+  podAnnotations: {}
+
+  service:
+    type: ClusterIP
+    port: 3001
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
 management:
   replicaCount: 1
   port: 80
