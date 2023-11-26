@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: switcher-resolver
+  labels:
+    {{- include "switcher-resolver.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.resolver.service.type }}
+  ports:
+    - port: {{ .Values.resolver.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "switcher-resolver.selectorLabels" . | nindent 4 }}

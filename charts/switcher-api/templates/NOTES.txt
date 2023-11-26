@@ -1,8 +1,9 @@
-Looks good! To access Switcher API, follow the 3 steps below:
+Looks good! To get started, you need to run the following commands:
 
 1. Port-forward UI and API services:
 
     kubectl -n {{ .Release.Namespace }} port-forward svc/switcher-api {{ .Values.api.port }}:{{ .Values.api.service.port }} & \
+    kubectl -n {{ .Release.Namespace }} port-forward svc/switcher-resolver {{ .Values.resolver.port }}:{{ .Values.resolver.service.port }} & \
     {{- if .Values.api.env.sslSecretName }}
     kubectl -n {{ .Release.Namespace }} port-forward svc/switcher-management {{ .Values.management.service.port }}:{{ .Values.management.service.portTls }} &
     {{- else }}
@@ -17,4 +18,12 @@ Looks good! To access Switcher API, follow the 3 steps below:
     http://localhost:{{ .Values.management.service.port }}
     {{- end }}
 
-3. Happy Switcher!
+3. Access Resolver API (use one of the Client SDKs):
+    
+    {{- if .Values.api.env.sslSecretName }}
+    https://localhost:{{ .Values.resolver.service.port }}
+    {{- else }}
+    http://localhost:{{ .Values.resolver.service.port }}
+    {{- end }}
+
+Happy Switcher!

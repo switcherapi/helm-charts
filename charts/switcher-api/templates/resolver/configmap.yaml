@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: switcher-resolver
+  labels:
+    {{- include "switcher-resolver.labels" . | nindent 4 }}
+data:
+  # SSL settings
+  {{- if .Values.resolver.env.sslSecretName }}
+  SSL_CERT: "/etc/certs/tls.crt"
+  SSL_KEY: "/etc/certs/tls.key"
+  {{- end -}}
+
+  # Global settings
+  SWITCHER_API_LOGGER: {{ .Values.resolver.env.switcherApiLogger | quote }}
+  METRICS_ACTIVATED: {{ .Values.resolver.env.metricsActivated | quote }}
+  RELAY_BYPASS_HTTPS: {{ .Values.resolver.env.relayBypassHttps | quote }}
+  RELAY_BYPASS_VERIFICATION: {{ .Values.resolver.env.relayBypassVerification | quote }}
+  REGEX_MAX_TIMEOUT: {{ default 3000 .Values.resolver.env.regexMaxTimeout | quote }}
+  REGEX_MAX_BLACKLIST: {{ default 50 .Values.resolver.env.regexMaxBlacklist | quote }}
+  MAX_REQUEST_PER_MINUTE: {{ default 0 .Values.resolver.env.maxRequestPerMinute | quote }}
+  JWT_CLIENT_TOKEN_EXP_TIME: {{ default "5m" .Values.resolver.env.jwtClientTokenExpTime | quote }}

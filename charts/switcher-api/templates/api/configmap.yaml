@@ -23,7 +23,7 @@ data:
   RELAY_BYPASS_HTTPS: {{ .Values.api.env.relayBypassHttps | quote }}
   RELAY_BYPASS_VERIFICATION: {{ .Values.api.env.relayBypassVerification | quote }}
   REGEX_MAX_TIMEOUT: {{ default 3000 .Values.api.env.regexMaxTimeout | quote }}
-  REGEX_MAX_BLACLIST: {{ default 50 .Values.api.env.regexMaxBlacklist | quote }}
+  REGEX_MAX_BLACKLIST: {{ default 50 .Values.api.env.regexMaxBlacklist | quote }}
   MAX_REQUEST_PER_MINUTE: {{ default 0 .Values.api.env.maxRequestPerMinute | quote }}
   JWT_ADMIN_TOKEN_RENEW_INTERVAL: {{ default "5m" .Values.api.env.jwtAdminTokenRenewInterval | quote }}
   JWT_CLIENT_TOKEN_EXP_TIME: {{ default "5m" .Values.api.env.jwtClientTokenExpTime | quote }}
