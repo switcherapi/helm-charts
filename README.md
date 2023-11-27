@@ -78,7 +78,7 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.googleRecaptchaSecret`       | Google ReCaptcha Secret                       | ``                    |
 | `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
 
-(*) - Depracated parameters will be removed in future versions. Those are now managed by the Resolver API.
+(*) - Deprecated parameters will be removed in future versions. Those are now managed by the Resolver API.
 
 ### Resolver API parameters
 
