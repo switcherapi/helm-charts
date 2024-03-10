@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "switcher-management.labels" . | nindent 4 }}
 data:
+  ALLOW_HOME_VIEW: {{ .Values.management.env.allowHomeView | quote }}
   SWITCHERAPI_URL: {{ .Values.management.env.switcherApiUrl }}
   SM_IP: {{ .Values.management.env.switcherManagementUrl }}
   GOOGLE_RECAPTCHA: {{ .Values.management.env.googleRecaptcha }}

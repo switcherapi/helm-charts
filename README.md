@@ -113,6 +113,7 @@ helm uninstall switcherapi --namespace switcherapi
 | `management.env.switcherApiUrl`       | Switcher API URL                               | `http://localhost:3000`   |
 | `management.env.switcherManagementUrl`| Management callback URL                        | `http://localhost:8080`   |
 | `management.env.switcherSlackUrl`     | Switcher Slack App URL                         | `http://localhost:5000`   |
+| `management.env.allowHomeView`        | Allow Home View                                | false                     |
 | `management.env.googleRecaptcha`      | Google ReCaptcha Public Key                    | ``                        |
 | `management.env.bitbucketClientId`    | Bitbucket Client Id                            | ``                        |
 | `management.env.githubClientId`       | GitHub Client Id                               | ``                        |
