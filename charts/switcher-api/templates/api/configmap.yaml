@@ -21,7 +21,7 @@ data:
   MAX_STRATEGY_OPERATION: {{ default 100 .Values.api.env.strategyMaxOperation | quote }}
   RELAY_BYPASS_HTTPS: {{ .Values.api.env.relayBypassHttps | quote }}
   RELAY_BYPASS_VERIFICATION: {{ .Values.api.env.relayBypassVerification | quote }}
-  MAX_REQUEST_PER_MINUTE: {{ default 0 .Values.api.env.maxRequestPerMinute | quote }}
+  MAX_REQUEST_PER_MINUTE: {{ default 1000 .Values.api.env.maxRequestPerMinute | quote }}
   JWT_ADMIN_TOKEN_RENEW_INTERVAL: {{ default "5m" .Values.api.env.jwtAdminTokenRenewInterval | quote }}
 
   # Auth Integration 
