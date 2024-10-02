@@ -9,3 +9,4 @@ data:
   SLACK_CLIENT_ID: {{ default "[CHANGE_ME]" .Values.app.env.slackClientId | quote }}
   SWITCHER_URL: {{ .Values.app.env.switcherManagementUrl | quote }}
   SWITCHER_API_URL: {{ .Values.app.env.switcherAPIUrl | quote }}
+  SWITCHER_CERT_PATH: {{ .Values.app.env.switcherCertPath | quote }}
