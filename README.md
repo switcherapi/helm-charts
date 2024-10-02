@@ -73,6 +73,7 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.githubClientSecret`          | GitHub Client Secret                          | ``                    |
 | `api.env.googleRecaptchaSecret`       | Google ReCaptcha Secret                       | ``                    |
 | `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
+| `api.env.switcherGitOpsJwtSecret`     | Switcher GitOps Secret                        | ``                    |
 
 ### Resolver API parameters
 
