@@ -7,8 +7,9 @@ app:
     switcherManagementUrl: "https://cloud.switcherapi.com"
     switcherAPIUrl: "https://switcherapi.com/api"
 
-    # Enable SSL (tls.crt and tls.key)
+    # Enable SSL
     sslSecretName: ""
+    switcherCertPath: ""
 
   image:
     repository: trackerforce/switcher-slack-app

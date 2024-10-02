@@ -166,9 +166,10 @@ helm uninstall switcherslackapp --namespace switcherapi
 | `app.env.slackClientId`           | Slack Client Id                                | ``                     |
 | `app.env.switcherManagementUrl`   | Switcher Management URL for callback auth      | ``                     |
 | `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
+| `app.env.switcherCertPath`        | Switcher API SSL Cert Path                     | ``                     |
 | `app.env.slackSigningSecret`      | Slack Signing Secret                           | ``                     |
 | `app.env.slackClientSecret`       | Slack Client Secret                            | ``                     |
-| `app.env.sslSecretName`           | App SSL Secret Name (enable HTTPS)             | ``                     |
+| `app.env.sslSecretName`           | SSL Secret Name (TLS for Switcher API)         | ``                     |
 
 ## Local
 
