@@ -14,6 +14,12 @@
 
 ***
 
+# Table of Contents
+
+- [Switcher API Helm Charts](#switcher-api-helm-charts)
+- [Switcher Slack App Helm Charts](#switcher-slack-app-helm-charts)
+- [Switcher GitOps Helm Charts](#switcher-gitops-helm-charts)
+
 # Switcher API Helm Charts
 
 Deploy Switcher API using `switcherapi/switcher-api` Helm Charts.
@@ -74,6 +80,7 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.googleRecaptchaSecret`       | Google ReCaptcha Secret                       | ``                    |
 | `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
 | `api.env.switcherGitOpsJwtSecret`     | Switcher GitOps Secret                        | ``                    |
+| `api.env.switcherGitOpsUrl`           | Switcher GitOps URL                           | ``                    |
 
 ### Resolver API parameters
 
@@ -183,4 +190,55 @@ helm install -f charts/switcher-slack-app/values.yaml switcherslackapp ./charts/
     --set app.env.switcherAPIUrl="https://switcherapi.com/api" \
     --set app.env.slackSigningSecret="[CHANGE_ME]" \
     --set app.env.slackClientSecret="[CHANGE_ME]"
+```
+
+# Switcher GitOps Helm Charts
+
+Deploy Switcher GitOps using `switcherapi/switcher-gitops` Helm Charts.
+
+## Usage
+
+> Install Switcher GitOps
+```console
+helm repo add switcherapi https://switcherapi.github.io/helm-charts
+helm install switchergitops switcherapi/switcher-gitops \
+    --namespace=switcherapi --create-namespace \
+    --set app.env.switcherApiJwtSecret="[CHANGE_ME]" \
+    --set app.env.gitTokenPrivateKey="[CHANGE_ME]"
+```
+
+> Uninstall Switcher GitOps
+```console
+helm uninstall switchergitops --namespace switcherapi
+```
+
+### App parameters
+
+| Name                       | Description                                    | Value                  |
+| -------------------------- | ---------------------------------------------- | ---------------------- |
+| `app.image.tag`            | Switcher GitOps Image tag                      | `latest`               |
+| `app.service.port`         | App Service port                               | 8000                   |
+
+| Name                              | Description                                    | Value                  |
+| --------------------------------- | ---------------------------------------------- | ---------------------- |
+| `api.env.sslEnabled`              | API SSL Enabled                                | `false`                |
+| `api.env.sslSecretName`           | API SSL Secret Name (enable HTTPS)             | ``                     |
+| `app.env.switcherCertPath`        | API SSL Cert Path                              | ``                     |
+| `app.env.gitTokenPrivateKey`      | Git Token Private Key                          | ``                     |
+| `app.env.switcherApiJwtSecret`    | Switcher API JWT Secret                        | ``                     |
+| `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
+| `app.env.switcherApiCACert`       | Switcher API SSL CA Cert Path                  | ``                     |
+| `app.env.mongoUri`                | API Database URI                               | < see values.yml >     |
+| `app.env.mongoDb`                 | API Database Name                              | `switcher-gitops`      |
+| `app.env.hanlderWaitingTime`      | Handler Waiting Time                           | `1m`                   |
+| `app.env.gitUser`                 | Git User                                       | `switcher-gitops`      |
+
+## Local
+
+Validate Chart from local Values
+```console
+helm install -f charts/switcher-gitops/values.yaml switchergitops ./charts/switcher-gitops/ \
+    --namespace=switcherapi --create-namespace \
+    --set app.env.switcherApiJwtSecret="[CHANGE_ME]" \
+    --set app.env.gitTokenPrivateKey="[CHANGE_ME]"
 ```

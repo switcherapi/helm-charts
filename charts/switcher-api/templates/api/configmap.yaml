@@ -31,3 +31,6 @@ data:
   {{- if and .Values.api.env.githubClientId .Values.api.env.githubClientSecret -}}
   GIT_OAUTH_CLIENT_ID: {{ .Values.api.env.githubClientId | quote }}
   {{- end -}}
+
+  # Switcher GitOps
+  SWITCHER_GITOPS_URL: {{ .Values.api.env.switcherGitOpsUrl | quote }}
