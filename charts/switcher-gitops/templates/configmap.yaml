@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: switcher-gitops
+  labels:
+    {{- include "switcher-gitops.labels" . | nindent 4 }}
+data:
+  LOG_LEVEL: {{ .Values.app.env.logLevel | quote }}
+  PORT: {{ .Values.app.port | quote }}
+  SSL_ENABLED: {{ .Values.app.env.sslEnabled | quote }}
+  SSL_CERT_FILE: {{ .Values.app.env.switcherCertPath | quote }}
+  SSL_KEY_FILE: {{ .Values.app.env.switcherCertPath | quote }}
+  HANDLER_WAITING_TIME: {{ .Values.app.env.hanlderWaitingTime | quote }}
+  GIT_USER: {{ .Values.app.env.gitUser | quote }}
+  
+  # Switcher API
+  SWITCHER_API_URL: {{ .Values.app.env.switcherAPIUrl | quote }}
+  SWITCHER_API_CA_CERT: {{ .Values.app.env.switcherApiCACert | quote }}
+  SWITCHER_PATH_GRAPHQL: {{ .Values.app.env.switcherPathGraphQL | quote }}
+  SWITCHER_PATH_PUSH: {{ .Values.app.env.switcherPathPush | quote }}

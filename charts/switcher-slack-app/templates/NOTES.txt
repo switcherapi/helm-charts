@@ -1,7 +1,7 @@
 Looks good! Remember that Slack only likes HTTPS.
 Test the installation with the steps below:
 
-1. Port-forward UI and App service:
+1. Port-forward App service:
 
     kubectl -n {{ .Release.Namespace }} port-forward svc/switcher-slack-app {{ .Values.app.service.port }}:{{ .Values.app.service.port }} &
 
