@@ -153,6 +153,7 @@ helm install switcherslackapp switcherapi/switcher-slack-app \
     --set app.env.slackClientId="" \
     --set app.env.switcherManagementUrl="" \
     --set app.env.switcherAPIUrl="" \
+    --set app.env.switcherJwtSecret="" \
     --set app.env.slackSigningSecret="" \
     --set app.env.slackClientSecret=""
 ```
@@ -175,6 +176,7 @@ helm uninstall switcherslackapp --namespace switcherapi
 | `app.env.switcherManagementUrl`   | Switcher Management URL for callback auth      | ``                     |
 | `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
 | `app.env.switcherCertPath`        | Switcher API SSL Cert Path                     | ``                     |
+| `app.env.switcherJwtSecret`       | Switcher API JWT Secret                        | ``                     |
 | `app.env.slackSigningSecret`      | Slack Signing Secret                           | ``                     |
 | `app.env.slackClientSecret`       | Slack Client Secret                            | ``                     |
 | `app.env.sslSecretName`           | SSL Secret Name (TLS for Switcher API)         | ``                     |
@@ -188,6 +190,7 @@ helm install -f charts/switcher-slack-app/values.yaml switcherslackapp ./charts/
     --set app.env.slackClientId="[CHANGE_ME]" \
     --set app.env.switcherManagementUrl="https://cloud.switcherapi.com" \
     --set app.env.switcherAPIUrl="https://switcherapi.com/api" \
+    --set app.env.switcherJwtSecret="[CHANGE_ME]" \
     --set app.env.slackSigningSecret="[CHANGE_ME]" \
     --set app.env.slackClientSecret="[CHANGE_ME]"
 ```
@@ -203,8 +206,9 @@ Deploy Switcher GitOps using `switcherapi/switcher-gitops` Helm Charts.
 helm repo add switcherapi https://switcherapi.github.io/helm-charts
 helm install switchergitops switcherapi/switcher-gitops \
     --namespace=switcherapi --create-namespace \
-    --set app.env.switcherApiJwtSecret="[CHANGE_ME]" \
-    --set app.env.gitTokenPrivateKey="[CHANGE_ME]"
+    --set app.env.switcherAPIUrl="" \
+    --set app.env.switcherApiJwtSecret="" \
+    --set app.env.gitTokenPrivateKey=""
 ```
 
 > Uninstall Switcher GitOps
