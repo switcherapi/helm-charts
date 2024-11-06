@@ -42,12 +42,12 @@ spec:
             "gunicorn", 
             "--certfile=/etc/certs/tls.crt", "--keyfile=/etc/certs/tls.key", 
             "--bind", "0.0.0.0:{{ .Values.app.port }}", 
-            "--chdir", "/home/app", "app:flask_app"]
+            "--chdir", "/home/app", "app:slack_app"]
           {{- else }}
           command: [
             "gunicorn", 
             "--bind", "0.0.0.0:{{ .Values.app.port }}", 
-            "--chdir", "/home/app", "app:flask_app"]
+            "--chdir", "/home/app", "app:slack_app"]
           {{- end }}
           ports:
             - name: http
