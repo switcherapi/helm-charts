@@ -28,6 +28,13 @@ on:
 jobs:
   lint-test:
     runs-on: ubuntu-latest
+    env:
+      SETUP_HELM_VERSION: ${{ github.event.inputs.setup-helm-version }}
+      HELM_VERSION: ${{ github.event.inputs.helm-version }}
+      SETUP_PYTHON_VERSION: ${{ github.event.inputs.setup-python-version }}
+      CHART_TESTING_ACTION_VERSION: ${{ github.event.inputs.chart-testing-action-version }}
+      KIND_ACTION_VERSION: ${{ github.event.inputs.kind-action-version }}
+      
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -41,23 +48,23 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Helm
-        uses: azure/setup-helm@${{ github.event.inputs.setup-helm-version }}
+        uses: azure/setup-helm@${{ env.SETUP_HELM_VERSION }}
         with:
-          version: ${{ github.event.inputs.helm-version }}
+          version: ${{ env.HELM_VERSION }}
 
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ github.event.inputs.setup-python-version }}
+          python-version: ${{ env.SETUP_PYTHON_VERSION }}
           check-latest: true
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@${{ github.event.inputs.chart-testing-action-version }}
+        uses: helm/chart-testing-action@${{ env.CHART_TESTING_ACTION_VERSION }}
 
       - name: Run chart-testing (lint)
         run: ct lint --target-branch ${{ github.event.repository.default_branch }}
 
       - name: Create kind cluster
-        uses: helm/kind-action@${{ github.event.inputs.kind-action-version }}
+        uses: helm/kind-action@${{ env.KIND_ACTION_VERSION }}
 
       - name: Run chart-testing (install)
         run: ct install --target-branch ${{ github.event.repository.default_branch }}
