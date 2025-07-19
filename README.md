@@ -1,248 +1,54 @@
 ***
 
 <div align="center">
-<b>Switcher API Kubernetes Helm Charts</b>
+<b>Switcher API Helm Charts</b>
 </div>
 
 <div align="center">
 
 [![Release Charts](https://github.com/switcherapi/helm-charts/actions/workflows/release.yml/badge.svg)](https://github.com/switcherapi/helm-charts/actions/workflows/release.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/switcherapi)](https://artifacthub.io/packages/search?repo=switcherapi)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/switcherapi/helm-charts/blob/main/LICENSE)
 [![Slack: Switcher-HQ](https://img.shields.io/badge/slack-@switcher/hq-blue.svg?logo=slack)](https://switcher-hq.slack.com/)
 
 </div>
 
 ***
 
-# Table of Contents
-
-- [Switcher API Helm Charts](#switcher-api-helm-charts)
-- [Switcher Slack App Helm Charts](#switcher-slack-app-helm-charts)
-- [Switcher GitOps Helm Charts](#switcher-gitops-helm-charts)
-
-# Switcher API Helm Charts
-
-Deploy Switcher API using `switcherapi/switcher-api` Helm Charts.
-
-## Usage
+Switcher API Helm Charts provide a set of Helm charts for deploying the Switcher API and its related components in Kubernetes environments. These charts simplify the deployment and management of the Switcher API ecosystem, including the core API, resolver node, management interface, Slack app integration, and GitOps orchestrator.
 
 [Helm](https://helm.sh) must be installed to use the charts.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-Once Helm is set up properly, follow the steps below:
-
-> Install MongoDB
-```console
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install db bitnami/mongodb \
-    --namespace=switcherapi --create-namespace \
-    --set auth.enabled=false
-```
-
-> Install Switcher API
-```console
+```bash
 helm repo add switcherapi https://switcherapi.github.io/helm-charts
-helm install switcherapi switcherapi/switcher-api \
-    --namespace=switcherapi --create-namespace
 ```
 
-> Uninstall Switcher API
-```console
-helm uninstall switcherapi --namespace switcherapi
-```
+# Switcher API Helm Charts
 
-### API parameters
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/switcher-api)](https://artifacthub.io/packages/helm/switcherapi/switcher-api)
+[![Charts README](https://img.shields.io/badge/charts-README-blue.svg)](https://github.com/switcherapi/helm-charts/blob/master/charts/switcher-api/README.md)
 
-| Name                       | Description                                    | Value                  |
-| -------------------------- | ---------------------------------------------- | ---------------------- |
-| `api.image.tag`            | Switcher API Image tag                         | `latest`               |
-| `api.service.port`         | API Service port                               | 3000                   |
-
-| Name                                  | Description                                   | Value                 |
-| ------------------------------------- | --------------------------------------------- | --------------------- |
-| `api.env.sslSecretName`               | API SSL Secret Name (enable HTTPS)            | ``                    |
-| `api.env.resourceSecret`              | API Swagger (user: admin)                     | `admin`               |
-| `api.env.switcherApiLogger`           | API log                                       | true                  |
-| `api.env.historyActivated`            | API Change Log record                         | true                  |
-| `api.env.permissionCacheActivated`    | API Permission Cache                          | true                  |
-| `api.env.googleSkipAuth`              | Skip Google ReCaptcha validation              | true                  |
-| `api.env.metricsMaxPage`              | Metrics: max logs per page                    | 50                    |
-| `api.env.strategyMaxOperation`        | Strategy: max operation entries               | 100                   |
-| `api.env.relayBypassHttps`            | Relay: Bypass HTTPS validation                | false                 |
-| `api.env.relayBypassVerification`     | Relay: Bypass Verification                    | false                 |
-| `api.env.maxRequestPerMinute`         | API max Request per minute                    | 1000                  |
-| `api.env.jwtAdminTokenRenewInterval`  | User token renew interval                     | `5m`                  |
-| `api.env.mongoUri`                    | API Database URI                              | < see values.yml >    |
-| `api.env.bitbucketClientId`           | Bitbucket Client Id                           | ``                    |
-| `api.env.bitbucketClientSecret`       | Bitbucket Client Secret                       | ``                    |
-| `api.env.githubClientId`              | GitHub Client Id                              | ``                    |
-| `api.env.githubClientSecret`          | GitHub Client Secret                          | ``                    |
-| `api.env.googleRecaptchaSecret`       | Google ReCaptcha Secret                       | ``                    |
-| `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
-| `api.env.switcherGitOpsJwtSecret`     | Switcher GitOps Secret                        | ``                    |
-| `api.env.switcherGitOpsUrl`           | Switcher GitOps URL                           | ``                    |
-
-### Resolver API parameters
-
-| Name                            | Description                                    | Value                  |
-| ------------------------------- | ---------------------------------------------- | ---------------------- |
-| `resolver.image.tag`            | Switcher Resolver Image tag                    | `latest`               |
-| `resolver.service.port`         | API Service port                               | 3001                   |
-
-| Name                                       | Description                                   | Value                 |
-| ------------------------------------------ | --------------------------------------------- | --------------------- |
-| `resolver.env.sslSecretName`               | API SSL Secret Name (enable HTTPS)            | ``                    |
-| `resolver.env.resourceSecret`              | API Swagger (user: admin)                     | `admin`               |
-| `resolver.env.switcherApiLogger`           | API log                                       | true                  |
-| `resolver.env.metricsActivated`            | API Metrics record                            | true                  |
-| `resolver.env.relayBypassHttps`            | Relay: Bypass HTTPS validation                | false                 |
-| `resolver.env.relayBypassVerification`     | Relay: Bypass Verification                    | false                 |
-| `resolver.env.regexMaxTimeout`             | Regex Validator: max timeout in ms            | 3000                  |
-| `resolver.env.regexMaxBlacklist`           | Regex Validator: max blacklist entries        | 50                    |
-| `resolver.env.maxRequestPerMinute`         | API max Request per minute                    | 0 (unlimited)         |
-| `resolver.env.jwtClientTokenExpTime`       | Component token renew interval                | `5m`                  |
-| `resolver.env.mongoUri`                    | API Database URI                              | < see values.yml >    |
-
-### Management parameters
-
-| Name                       | Description                                    | Value                  |
-| -------------------------- | ---------------------------------------------- | ---------------------- |
-| `management.image.tag`     | Switcher Management Image tag                  | `latest`               |
-| `management.service.port`  | Management Service port                        | 8080                   |
-
-| Name                                  | Description                                    | Value                     |
-| ------------------------------------- | ---------------------------------------------- | ------------------------- |
-| `management.env.switcherApiUrl`       | Switcher API URL                               | `http://localhost:3000`   |
-| `management.env.switcherManagementUrl`| Management callback URL                        | `http://localhost:8080`   |
-| `management.env.switcherSlackUrl`     | Switcher Slack App URL                         | `http://localhost:5000`   |
-| `management.env.allowHomeView`        | Allow Home View                                | false                     |
-| `management.env.googleRecaptcha`      | Google ReCaptcha Public Key                    | ``                        |
-| `management.env.bitbucketClientId`    | Bitbucket Client Id                            | ``                        |
-| `management.env.githubClientId`       | GitHub Client Id                               | ``                        |
-
-## Local
-
-Validate Chart from local Values
-```console
-helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-api/ \
-    --namespace=switcherapi --create-namespace
-```
-
-SSL Enabled
-```console
-helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-api/ \
-    --namespace=switcherapi --create-namespace \
-    --set api.env.sslSecretName="[CHANGE_ME]" \
-    --set management.env.switcherApiUrl="https://localhost:3000" \
-    --set management.env.switcherManagementUrl="https://localhost:8080"
-```
+| Component | Description | Repository Link | Source Code |
+|-----------|-------------|-----------------|-------------|
+| Switcher API | Core API that manages Switcher API ecosystem | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-api) | [GitHub](https://github.com/switcherapi/switcher-api) |
+| Switcher Resolver Node | Proxy handler that interfaces Switcher Components with Switcher API | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-resolver-node) | [GitHub](https://github.com/switcherapi/switcher-resolver-node) |
+| Switcher Management | Web interface for managing Switcher API | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-management) | [GitHub](https://github.com/switcherapi/switcher-management) |
 
 # Switcher Slack App Helm Charts
 
-Deploy Switcher Slack App using `switcherapi/switcher-slack-app` Helm Charts.
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/switcher-slack-app)](https://artifacthub.io/packages/helm/switcherapi/switcher-slack-app)
+[![Charts README](https://img.shields.io/badge/charts-README-blue.svg)](https://github.com/switcherapi/helm-charts/blob/master/charts/switcher-slack-app/README.md)
 
-## Usage
-
-Follow the [Switcher Slack App instructions](https://github.com/switcherapi/switcher-slack-app#create-slack-app) to create a Slack App before installing this Chart.
-
-> Install Switcher Slack App
-```console
-helm repo add switcherapi https://switcherapi.github.io/helm-charts
-helm install switcherslackapp switcherapi/switcher-slack-app \
-    --namespace=switcherapi --create-namespace \
-    --set app.env.slackClientId="" \
-    --set app.env.switcherManagementUrl="" \
-    --set app.env.switcherAPIUrl="" \
-    --set app.env.switcherJwtSecret="" \
-    --set app.env.slackSigningSecret="" \
-    --set app.env.slackClientSecret=""
-```
-
-> Uninstall Switcher Slack App
-```console
-helm uninstall switcherslackapp --namespace switcherapi
-```
-
-### App parameters
-
-| Name                       | Description                                    | Value                  |
-| -------------------------- | ---------------------------------------------- | ---------------------- |
-| `app.image.tag`            | Switcher Slack App Image tag                   | `latest`               |
-| `app.service.port`         | App Service port                               | 5000                   |
-
-| Name                              | Description                                    | Value                  |
-| --------------------------------- | ---------------------------------------------- | ---------------------- |
-| `app.env.slackClientId`           | Slack Client Id                                | ``                     |
-| `app.env.switcherManagementUrl`   | Switcher Management URL for callback auth      | ``                     |
-| `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
-| `app.env.switcherCertPath`        | Switcher API SSL Cert Path                     | ``                     |
-| `app.env.switcherJwtSecret`       | Switcher API JWT Secret                        | ``                     |
-| `app.env.slackSigningSecret`      | Slack Signing Secret                           | ``                     |
-| `app.env.slackClientSecret`       | Slack Client Secret                            | ``                     |
-| `app.env.sslSecretName`           | SSL Secret Name (TLS for Switcher API)         | ``                     |
-
-## Local
-
-Validate Chart from local Values
-```console
-helm install -f charts/switcher-slack-app/values.yaml switcherslackapp ./charts/switcher-slack-app/ \
-    --namespace=switcherapi --create-namespace \
-    --set app.env.slackClientId="[CHANGE_ME]" \
-    --set app.env.switcherManagementUrl="https://cloud.switcherapi.com" \
-    --set app.env.switcherAPIUrl="https://switcherapi.com/api" \
-    --set app.env.switcherJwtSecret="[CHANGE_ME]" \
-    --set app.env.slackSigningSecret="[CHANGE_ME]" \
-    --set app.env.slackClientSecret="[CHANGE_ME]"
-```
+| Component | Description | Repository Link | Source Code |
+|-----------|-------------|-----------------|-------------|
+| Switcher Slack App | Allows teams to integrate Switcher API workflows with Slack | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-slack-app) | [GitHub](https://github.com/switcherapi/switcher-slack-app) |
 
 # Switcher GitOps Helm Charts
 
-Deploy Switcher GitOps using `switcherapi/switcher-gitops` Helm Charts.
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/switcher-gitops)](https://artifacthub.io/packages/helm/switcherapi/switcher-gitops)
+[![Charts README](https://img.shields.io/badge/charts-README-blue.svg)](https://github.com/switcherapi/helm-charts/blob/master/charts/switcher-gitops/README.md)
 
-## Usage
-
-> Install Switcher GitOps
-```console
-helm repo add switcherapi https://switcherapi.github.io/helm-charts
-helm install switchergitops switcherapi/switcher-gitops \
-    --namespace=switcherapi --create-namespace \
-    --set app.env.switcherAPIUrl="" \
-    --set app.env.switcherApiJwtSecret="" \
-    --set app.env.gitTokenPrivateKey=""
-```
-
-> Uninstall Switcher GitOps
-```console
-helm uninstall switchergitops --namespace switcherapi
-```
-
-### App parameters
-
-| Name                       | Description                                    | Value                  |
-| -------------------------- | ---------------------------------------------- | ---------------------- |
-| `app.image.tag`            | Switcher GitOps Image tag                      | `latest`               |
-| `app.service.port`         | App Service port                               | 8000                   |
-
-| Name                              | Description                                    | Value                  |
-| --------------------------------- | ---------------------------------------------- | ---------------------- |
-| `api.env.sslEnabled`              | API SSL Enabled                                | `false`                |
-| `api.env.sslSecretName`           | API SSL Secret Name (enable HTTPS)             | ``                     |
-| `app.env.switcherCertPath`        | API SSL Cert Path                              | ``                     |
-| `app.env.gitTokenPrivateKey`      | Git Token Private Key                          | ``                     |
-| `app.env.switcherApiJwtSecret`    | Switcher API JWT Secret                        | ``                     |
-| `app.env.switcherAPIUrl`          | Switcher API URL                               | ``                     |
-| `app.env.switcherApiCACert`       | Switcher API SSL CA Cert Path                  | ``                     |
-| `app.env.mongoUri`                | API Database URI                               | < see values.yml >     |
-| `app.env.mongoDb`                 | API Database Name                              | `switcher-gitops`      |
-| `app.env.hanlderWaitingTime`      | Handler Waiting Time                           | `1m`                   |
-| `app.env.gitUser`                 | Git User                                       | `switcher-gitops`      |
-
-## Local
-
-Validate Chart from local Values
-```console
-helm install -f charts/switcher-gitops/values.yaml switchergitops ./charts/switcher-gitops/ \
-    --namespace=switcherapi --create-namespace \
-    --set app.env.switcherApiJwtSecret="[CHANGE_ME]" \
-    --set app.env.gitTokenPrivateKey="[CHANGE_ME]"
-```
+| Component | Description | Repository Link | Source Code |
+|-----------|-------------|-----------------|-------------|
+| Switcher GitOps | GitOps Domain Snapshot Orchestrator | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-gitops) | [GitHub](https://github.com/switcherapi/switcher-gitops) |
