@@ -54,6 +54,15 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
 | `api.env.switcherGitOpsJwtSecret`     | Switcher GitOps Secret                        | ``                    |
 | `api.env.switcherGitOpsUrl`           | Switcher GitOps URL                           | ``                    |
+| `api.env.samlEntryPoint`              | SAML Entry Point URL                          | ``                    |
+| `api.env.samlIssuer`                  | SAML Issuer                                   | ``                    |
+| `api.env.samlCertificate`             | SAML Certificate (Base64 encoded)             | ``                    |
+| `api.env.samlPrivateKey`              | SAML Private Key (Base64 encoded)             | ``                    |
+| `api.env.samlSessionSecret`           | SAML Session Secret (Base64 encoded)          | ``                    |
+| `api.env.samlCallbackEndpointUrl`     | SAML Callback Endpoint URL                    | ``                    |
+| `api.env.samlRedirectEndpointUrl`     | SAML Redirect Endpoint URL                    | ``                    |
+| `api.env.samlIdentifierFormat`        | SAML Identifier Format                        | `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` |
+| `api.env.samlAcceptedClockSkewMs`     | SAML Accepted Clock Skew in ms                | 5000                  |
 
 ### Resolver API parameters
 

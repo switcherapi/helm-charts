@@ -32,5 +32,15 @@ data:
   GIT_OAUTH_CLIENT_ID: {{ .Values.api.env.githubClientId | quote }}
   {{- end -}}
 
+  # SAML Integration
+  {{- if and .Values.api.env.samlEntryPoint .Values.api.env.samlCallbackEndpointUrl -}}
+  SAML_ENTRY_POINT: {{ .Values.api.env.samlEntryPoint | quote }}
+  SAML_ISSUER: {{ .Values.api.env.samlIssuer | quote }}
+  SAML_CALLBACK_ENDPOINT_URL: {{ .Values.api.env.samlCallbackEndpointUrl | quote }}
+  SAML_REDIRECT_ENDPOINT_URL: {{ .Values.api.env.samlRedirectEndpointUrl | quote }}
+  SAML_IDENTIFIER_FORMAT: {{ .Values.api.env.samlIdentifierFormat | quote }}
+  SAML_ACCEPTED_CLOCK_SKEW_MS: {{ default 5000 .Values.api.env.samlAcceptedClockSkewMs | quote }}
+  {{- end -}}
+
   # Switcher GitOps
   SWITCHER_GITOPS_URL: {{ .Values.api.env.switcherGitOpsUrl | quote }}

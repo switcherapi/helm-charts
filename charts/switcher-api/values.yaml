@@ -3,15 +3,46 @@ api:
   port: 3000
 
   env:
+    # Main Configuration
     mongoUri: mongodb://db-mongodb.switcherapi.svc.cluster.local:27017/switcher-api
+    resourceSecret: "admin"
     switcherApiLogger: true
     historyActivated: true
     metricsActivated: true
     permissionCacheActivated: true
     googleSkipAuth: true
+    metricsMaxPage: 50
+    strategyMaxOperation: 100
+    relayBypassHttps: false
+    relayBypassVerification: false
+    maxRequestPerMinute: 1000
+    jwtAdminTokenRenewInterval: "5m"
+    switcherGitOpsUrl: ""
+
+    # Platform/Services Integration
+    googleRecaptchaSecret: ""
+    switcherSlackJwtSecret: ""
+    switcherGitOpsJwtSecret: ""
 
     # Enable SSL (tls.crt and tls.key)
     sslSecretName: ""
+
+    # GitHub/Bitbucket OAuth
+    bitbucketClientId: ""
+    bitbucketClientSecret: ""
+    githubClientId: ""
+    githubClientSecret: ""
+
+    # SAML Integration
+    samlEntryPoint: ""
+    samlIssuer: "switcher-api"
+    samlCallbackEndpointUrl: ""
+    samlRedirectEndpointUrl: ""
+    samlIdentifierFormat: "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+    samlAcceptedClockSkewMs: 5000
+    samlCertificate: ""
+    samlPrivateKey: ""
+    samlSessionSecret: ""
 
   image:
     repository: trackerforce/switcher-api
@@ -63,8 +94,15 @@ resolver:
 
   env:
     mongoUri: mongodb://db-mongodb.switcherapi.svc.cluster.local:27017/switcher-api
+    resourceSecret: "admin"
     switcherApiLogger: true
     metricsActivated: true
+    relayBypassHttps: false
+    relayBypassVerification: false
+    regexMaxTimeout: 3000
+    regexMaxBlacklist: 50
+    maxRequestPerMinute: 0
+    jwtClientTokenExpTime: "5m"
 
     # Enable SSL (tls.crt and tls.key)
     sslSecretName: ""
@@ -123,6 +161,9 @@ management:
     switcherApiUrl: "http://localhost:3000"
     switcherManagementUrl: "http://localhost:8080"
     switcherSlackUrl: "http://localhost:5000"
+    googleRecaptcha: ""
+    githubClientId: ""
+    bitbucketClientId: ""
 
   image:
     repository: trackerforce/switcher-management
