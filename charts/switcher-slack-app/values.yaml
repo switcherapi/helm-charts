@@ -6,6 +6,9 @@ app:
     slackClientId: ""
     switcherManagementUrl: "https://cloud.switcherapi.com"
     switcherAPIUrl: "https://switcherapi.com/api"
+    slackSigningSecret: ""
+    slackClientSecret: ""
+    switcherJwtSecret: ""
 
     # Enable SSL
     sslSecretName: ""
