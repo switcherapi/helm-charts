@@ -10,8 +10,8 @@ data:
   PORT: {{ .Values.app.port | quote }}
   SSL_ENABLED: {{ .Values.app.env.sslEnabled | quote }}
   SSL_CERT_FILE: {{ .Values.app.env.switcherCertPath | quote }}
-  SSL_KEY_FILE: {{ .Values.app.env.switcherCertPath | quote }}
-  HANDLER_WAITING_TIME: {{ .Values.app.env.hanlderWaitingTime | quote }}
+  SSL_KEY_FILE: {{ .Values.app.env.switcherKeyPath | quote }}
+  HANDLER_WAITING_TIME: {{ .Values.app.env.handlerWaitingTime | quote }}
   GIT_USER: {{ .Values.app.env.gitUser | quote }}
   
   # Switcher API

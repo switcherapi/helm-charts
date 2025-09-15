@@ -31,7 +31,13 @@
                         "gitUser": {
                             "type": "string"
                         },
-                        "hanlderWaitingTime": {
+                        "gitTokenPrivateKey": {
+                            "type": "string"
+                        },
+                        "switcherApiJwtSecret": {
+                            "type": "string"
+                        },
+                        "handlerWaitingTime": {
                             "type": "string"
                         },
                         "logLevel": {
@@ -56,6 +62,9 @@
                             "type": "string"
                         },
                         "switcherCertPath": {
+                            "type": "string"
+                        },
+                        "switcherKeyPath": {
                             "type": "string"
                         },
                         "switcherPathGraphQL": {
