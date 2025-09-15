@@ -10,13 +10,16 @@ app:
     switcherAPIUrl: "https://switcherapi.com/api"
     switcherPathGraphQL: "/gitops-graphql"
     switcherPathPush: "/gitops/v1/push"
-    hanlderWaitingTime: "1m"
+    handlerWaitingTime: "1m"
     gitUser: "switcher-gitops"
+    gitTokenPrivateKey: ""
+    switcherApiJwtSecret: ""
 
     # Enable SSL
     sslEnabled: 'false'
     sslSecretName: ""
     switcherCertPath: ""
+    switcherKeyPath: ""
 
   image:
     repository: trackerforce/switcher-gitops
