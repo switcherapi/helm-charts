@@ -158,6 +158,8 @@ management:
 
   env:
     allowHomeView: false
+    allowInternalAuth: true
+    allowSamlAuth: false
     switcherApiUrl: "http://localhost:3000"
     switcherManagementUrl: "http://localhost:8080"
     switcherSlackUrl: "http://localhost:5000"

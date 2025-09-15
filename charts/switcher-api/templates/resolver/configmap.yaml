@@ -10,7 +10,7 @@ data:
   {{- if .Values.resolver.env.sslSecretName }}
   SSL_CERT: "/etc/certs/tls.crt"
   SSL_KEY: "/etc/certs/tls.key"
-  {{- end -}}
+  {{- end }}
 
   # Global settings
   SWITCHER_API_LOGGER: {{ .Values.resolver.env.switcherApiLogger | quote }}

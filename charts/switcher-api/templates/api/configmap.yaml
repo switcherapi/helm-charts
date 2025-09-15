@@ -10,7 +10,7 @@ data:
   {{- if .Values.api.env.sslSecretName }}
   SSL_CERT: "/etc/certs/tls.crt"
   SSL_KEY: "/etc/certs/tls.key"
-  {{- end -}}
+  {{- end }}
 
   # Global settings
   SWITCHER_API_LOGGER: {{ .Values.api.env.switcherApiLogger | quote }}
@@ -25,22 +25,22 @@ data:
   JWT_ADMIN_TOKEN_RENEW_INTERVAL: {{ default "5m" .Values.api.env.jwtAdminTokenRenewInterval | quote }}
 
   # Auth Integration 
-  {{- if and .Values.api.env.bitbucketClientId .Values.api.env.bitbucketClientSecret -}}
+  {{- if and .Values.api.env.bitbucketClientId .Values.api.env.bitbucketClientSecret }}
   BITBUCKET_OAUTH_CLIENT_ID: {{ .Values.api.env.bitbucketClientId | quote }}
-  {{- end -}}
-  {{- if and .Values.api.env.githubClientId .Values.api.env.githubClientSecret -}}
+  {{- end }}
+  {{- if and .Values.api.env.githubClientId .Values.api.env.githubClientSecret }}
   GIT_OAUTH_CLIENT_ID: {{ .Values.api.env.githubClientId | quote }}
-  {{- end -}}
+  {{- end }}
 
   # SAML Integration
-  {{- if and .Values.api.env.samlEntryPoint .Values.api.env.samlCallbackEndpointUrl -}}
+  {{- if and .Values.api.env.samlEntryPoint .Values.api.env.samlCallbackEndpointUrl }}
   SAML_ENTRY_POINT: {{ .Values.api.env.samlEntryPoint | quote }}
   SAML_ISSUER: {{ .Values.api.env.samlIssuer | quote }}
   SAML_CALLBACK_ENDPOINT_URL: {{ .Values.api.env.samlCallbackEndpointUrl | quote }}
   SAML_REDIRECT_ENDPOINT_URL: {{ .Values.api.env.samlRedirectEndpointUrl | quote }}
   SAML_IDENTIFIER_FORMAT: {{ .Values.api.env.samlIdentifierFormat | quote }}
   SAML_ACCEPTED_CLOCK_SKEW_MS: {{ default 5000 .Values.api.env.samlAcceptedClockSkewMs | quote }}
-  {{- end -}}
+  {{- end }}
 
   # Switcher GitOps
   SWITCHER_GITOPS_URL: {{ .Values.api.env.switcherGitOpsUrl | quote }}

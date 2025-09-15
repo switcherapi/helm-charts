@@ -222,6 +222,12 @@
                         "allowHomeView": {
                             "type": "boolean"
                         },
+                        "allowInternalAuth": {
+                            "type": "boolean"
+                        },
+                        "allowSamlAuth": {
+                            "type": "boolean"
+                        },
                         "switcherApiUrl": {
                             "type": "string"
                         },

@@ -7,6 +7,8 @@ metadata:
     {{- include "switcher-management.labels" . | nindent 4 }}
 data:
   ALLOW_HOME_VIEW: {{ .Values.management.env.allowHomeView | quote }}
+  ALLOW_INTERNAL_AUTH: {{ .Values.management.env.allowInternalAuth | quote }}
+  ALLOW_SAML_AUTH: {{ .Values.management.env.allowSamlAuth | quote }}
   SWITCHERAPI_URL: {{ .Values.management.env.switcherApiUrl }}
   SM_IP: {{ .Values.management.env.switcherManagementUrl }}
   GOOGLE_RECAPTCHA: {{ .Values.management.env.googleRecaptcha }}
