@@ -54,6 +54,15 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.switcherSlackJwtSecret`      | Switcher Slack Secret                         | ``                    |
 | `api.env.switcherGitOpsJwtSecret`     | Switcher GitOps Secret                        | ``                    |
 | `api.env.switcherGitOpsUrl`           | Switcher GitOps URL                           | ``                    |
+| `api.env.samlEntryPoint`              | SAML Entry Point URL                          | ``                    |
+| `api.env.samlIssuer`                  | SAML Issuer                                   | ``                    |
+| `api.env.samlCertificate`             | SAML Certificate (Base64 encoded)             | ``                    |
+| `api.env.samlPrivateKey`              | SAML Private Key (Base64 encoded)             | ``                    |
+| `api.env.samlSessionSecret`           | SAML Session Secret (Base64 encoded)          | ``                    |
+| `api.env.samlCallbackEndpointUrl`     | SAML Callback Endpoint URL                    | ``                    |
+| `api.env.samlRedirectEndpointUrl`     | SAML Redirect Endpoint URL                    | ``                    |
+| `api.env.samlIdentifierFormat`        | SAML Identifier Format                        | `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` |
+| `api.env.samlAcceptedClockSkewMs`     | SAML Accepted Clock Skew in ms                | 5000                  |
 
 ### Resolver API parameters
 
@@ -89,6 +98,8 @@ helm uninstall switcherapi --namespace switcherapi
 | `management.env.switcherManagementUrl`| Management callback URL                        | `http://localhost:8080`   |
 | `management.env.switcherSlackUrl`     | Switcher Slack App URL                         | `http://localhost:5000`   |
 | `management.env.allowHomeView`        | Allow Home View                                | false                     |
+| `management.env.allowInternalAuth`    | Allow Internal Authentication (email/password) | true                      |
+| `management.env.allowSamlAuth`        | Allow SAML Authentication                      | false                     |
 | `management.env.googleRecaptcha`      | Google ReCaptcha Public Key                    | ``                        |
 | `management.env.bitbucketClientId`    | Bitbucket Client Id                            | ``                        |
 | `management.env.githubClientId`       | GitHub Client Id                               | ``                        |
@@ -108,4 +119,16 @@ helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-ap
     --set api.env.sslSecretName="[CHANGE_ME]" \
     --set management.env.switcherApiUrl="https://localhost:3000" \
     --set management.env.switcherManagementUrl="https://localhost:8080"
+```
+
+SAML Enabled
+```console
+helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-api/ \
+    --namespace=switcherapi --create-namespace \
+    --set management.env.allowSamlAuth=true \
+    --set api.env.samlEntryPoint="https://<idp-url>" \
+    --set api.env.samlCertificate="[BASE64_ENCODED_CERTIFICATE]" \
+    --set api.env.samlSessionSecret="[BASE64_ENCODED_SESSION_SECRET]" \
+    --set api.env.samlCallbackEndpointUrl="http://localhost:3000" \
+    --set api.env.samlRedirectEndpointUrl="http://localhost:8080"
 ```

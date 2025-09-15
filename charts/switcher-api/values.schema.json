@@ -40,8 +40,80 @@
                         "mongoUri": {
                             "type": "string"
                         },
+                        "resourceSecret": {
+                            "type": "string"
+                        },
                         "permissionCacheActivated": {
                             "type": "boolean"
+                        },
+                        "metricsMaxPage": {
+                            "type": "integer"
+                        },
+                        "strategyMaxOperation": {
+                            "type": "integer"
+                        },
+                        "relayBypassHttps": {
+                            "type": "boolean"
+                        },
+                        "relayBypassVerification": {
+                            "type": "boolean"
+                        },
+                        "maxRequestPerMinute": {
+                            "type": "integer"
+                        },
+                        "jwtAdminTokenRenewInterval": {
+                            "type": "string"
+                        },
+                        "googleRecaptchaSecret": {
+                            "type": "string"
+                        },
+                        "switcherSlackJwtSecret": {
+                            "type": "string"
+                        },
+                        "switcherGitOpsJwtSecret": {
+                            "type": "string"
+                        },
+                        "switcherGitOpsUrl": {
+                            "type": "string"
+                        },
+                        "bitbucketClientId": {
+                            "type": "string"
+                        },
+                        "bitbucketClientSecret": {
+                            "type": "string"
+                        },
+                        "githubClientId": {
+                            "type": "string"
+                        },
+                        "githubClientSecret": {
+                            "type": "string"
+                        },
+                        "samlEntryPoint": {
+                            "type": "string"
+                        },
+                        "samlIssuer": {
+                            "type": "string"
+                        },
+                        "samlCallbackEndpointUrl": {
+                            "type": "string"
+                        },
+                        "samlRedirectEndpointUrl": {
+                            "type": "string"
+                        },
+                        "samlIdentifierFormat": {
+                            "type": "string"
+                        },
+                        "samlAcceptedClockSkewMs": {
+                            "type": "integer"
+                        },
+                        "samlCertificate": {
+                            "type": "string"
+                        },
+                        "samlPrivateKey": {
+                            "type": "string"
+                        },
+                        "samlSessionSecret": {
+                            "type": "string"
                         },
                         "sslSecretName": {
                             "type": "string"
@@ -150,6 +222,12 @@
                         "allowHomeView": {
                             "type": "boolean"
                         },
+                        "allowInternalAuth": {
+                            "type": "boolean"
+                        },
+                        "allowSamlAuth": {
+                            "type": "boolean"
+                        },
                         "switcherApiUrl": {
                             "type": "string"
                         },
@@ -157,6 +235,15 @@
                             "type": "string"
                         },
                         "switcherSlackUrl": {
+                            "type": "string"
+                        },
+                        "googleRecaptcha": {
+                            "type": "string"
+                        },
+                        "githubClientId": {
+                            "type": "string"
+                        },
+                        "githubClientSecret": {
                             "type": "string"
                         }
                     }
@@ -269,11 +356,32 @@
                         "mongoUri": {
                             "type": "string"
                         },
+                        "resourceSecret": {
+                            "type": "string"
+                        },
                         "sslSecretName": {
                             "type": "string"
                         },
                         "switcherApiLogger": {
                             "type": "boolean"
+                        },
+                        "relayBypassHttps": {
+                            "type": "boolean"
+                        },
+                        "relayBypassVerification": {
+                            "type": "boolean"
+                        },
+                        "regexMaxTimeout": {
+                            "type": "integer"
+                        },
+                        "regexMaxBlacklist": {
+                            "type": "integer"
+                        },
+                        "maxRequestPerMinute": {
+                            "type": "integer"
+                        },
+                        "jwtClientTokenExpTime": {
+                            "type": "string"
                         }
                     }
                 },
