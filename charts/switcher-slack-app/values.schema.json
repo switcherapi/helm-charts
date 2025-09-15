@@ -37,6 +37,15 @@
                         "switcherAPIUrl": {
                             "type": "string"
                         },
+                        "slackSigningSecret": {
+                            "type": "string"
+                        },
+                        "slackClientSecret": {
+                            "type": "string"
+                        },
+                        "switcherJwtSecret": {
+                            "type": "string"
+                        },
                         "switcherCertPath": {
                             "type": "string"
                         },
