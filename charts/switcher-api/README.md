@@ -63,6 +63,8 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.samlRedirectEndpointUrl`     | SAML Redirect Endpoint URL                    | ``                    |
 | `api.env.samlIdentifierFormat`        | SAML Identifier Format                        | `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` |
 | `api.env.samlAcceptedClockSkewMs`     | SAML Accepted Clock Skew in ms                | 5000                  |
+| `api.env.oauthIssuerUrl`              | OAuth Issuer Public URL                       | ``                    |
+| `api.env.oauthConsentUrl`             | OAuth Consent Public URL                      | ``                    |
 
 ### Resolver API parameters
 
@@ -82,6 +84,8 @@ helm uninstall switcherapi --namespace switcherapi
 | `resolver.env.regexMaxTimeout`             | Regex Validator: max timeout in ms            | 3000                  |
 | `resolver.env.regexMaxBlacklist`           | Regex Validator: max blacklist entries        | 50                    |
 | `resolver.env.maxRequestPerMinute`         | API max Request per minute                    | 0 (unlimited)         |
+| `resolver.env.cacheSnapshotMs`             | Cache snapshot duration in ms                 | ``                    |
+| `resolver.env.cacheComponentMs`            | Cache component duration in ms                | ``                    |
 | `resolver.env.jwtClientTokenExpTime`       | Component token renew interval                | `5m`                  |
 | `resolver.env.mongoUri`                    | API Database URI                              | < see values.yml >    |
 
@@ -131,4 +135,12 @@ helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-ap
     --set api.env.samlSessionSecret="[BASE64_ENCODED_SESSION_SECRET]" \
     --set api.env.samlCallbackEndpointUrl="http://localhost:3000" \
     --set api.env.samlRedirectEndpointUrl="http://localhost:8080"
+```
+
+OAuth Enabled
+```console
+helm install -f charts/switcher-api/values.yaml switcherapi ./charts/switcher-api/ \
+    --namespace=switcherapi --create-namespace \
+    --set api.env.oauthIssuerUrl="https://api.switcherapi.com" \
+    --set api.env.oauthConsentUrl="https://cloud.switcherapi.com"
 ```

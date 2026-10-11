@@ -44,6 +44,10 @@ api:
     samlPrivateKey: ""
     samlSessionSecret: ""
 
+    # OAuth Integration
+    oauthIssuerUrl: ""
+    oauthConsentUrl: ""
+
   image:
     repository: trackerforce/switcher-api
     pullPolicy: IfNotPresent
@@ -103,6 +107,8 @@ resolver:
     regexMaxBlacklist: 50
     maxRequestPerMinute: 0
     jwtClientTokenExpTime: "5m"
+    cacheSnapshotMs: ""
+    cacheComponentMs: ""
 
     # Enable SSL (tls.crt and tls.key)
     sslSecretName: ""

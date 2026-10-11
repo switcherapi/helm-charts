@@ -118,6 +118,12 @@
                         "sslSecretName": {
                             "type": "string"
                         },
+                        "oauthIssuerUrl": {
+                            "type": "string"
+                        },
+                        "oauthConsentUrl": {
+                            "type": "string"
+                        },
                         "switcherApiLogger": {
                             "type": "boolean"
                         }
@@ -378,6 +384,12 @@
                             "type": "integer"
                         },
                         "maxRequestPerMinute": {
+                            "type": "integer"
+                        },
+                        "cacheSnapshotMs": {
+                            "type": "integer"
+                        },
+                        "cacheComponentMs": {
                             "type": "integer"
                         },
                         "jwtClientTokenExpTime": {
