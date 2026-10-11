@@ -42,5 +42,11 @@ data:
   SAML_ACCEPTED_CLOCK_SKEW_MS: {{ default 5000 .Values.api.env.samlAcceptedClockSkewMs | quote }}
   {{- end }}
 
+  # OAuth Integration
+  {{- if and .Values.api.env.oauthIssuerUrl .Values.api.env.oauthConsentUrl }}
+  OAUTH_ISSUER_URL: {{ .Values.api.env.oauthIssuerUrl | quote }}
+  OAUTH_CONSENT_URL: {{ .Values.api.env.oauthConsentUrl | quote }}
+  {{- end }}
+
   # Switcher GitOps
   SWITCHER_GITOPS_URL: {{ .Values.api.env.switcherGitOpsUrl | quote }}
