@@ -107,8 +107,8 @@ resolver:
     regexMaxBlacklist: 50
     maxRequestPerMinute: 0
     jwtClientTokenExpTime: "5m"
-    cacheSnapshotMs: ""
-    cacheComponentMs: ""
+    cacheSnapshotMs: 0
+    cacheComponentMs: 0
 
     # Enable SSL (tls.crt and tls.key)
     sslSecretName: ""
