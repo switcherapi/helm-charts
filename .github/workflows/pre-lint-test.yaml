@@ -11,7 +11,7 @@ on:
       setup-helm-version:
         description: 'azure/setup-helm'
         required: true
-        default: 'v3.18.4'
+        default: 'v4.3.0'
       charts:
         description: 'List of charts to lint/test'
         required: true
@@ -37,13 +37,13 @@ jobs:
         with:
           version: ${{ github.event.inputs.setup-helm-version }}
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ github.event.inputs.setup-python-version }}
           check-latest: true
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.8.0
+        uses: helm/chart-testing-action@v2.9.0
 
       - name: Run chart-testing (lint)
         run: |

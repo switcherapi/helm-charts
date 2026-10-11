@@ -21,3 +21,10 @@ data:
   REGEX_MAX_BLACKLIST: {{ default 50 .Values.resolver.env.regexMaxBlacklist | quote }}
   MAX_REQUEST_PER_MINUTE: {{ default 0 .Values.resolver.env.maxRequestPerMinute | quote }}
   JWT_CLIENT_TOKEN_EXP_TIME: {{ default "5m" .Values.resolver.env.jwtClientTokenExpTime | quote }}
+
+  {{- if .Values.resolver.env.cacheSnapshotMs }}
+  CACHE_SNAPSHOT_MS: {{ .Values.resolver.env.cacheSnapshotMs | quote }}
+  {{- end }}
+  {{- if .Values.resolver.env.cacheComponentMs }}
+  CACHE_COMPONENT_MS: {{ .Values.resolver.env.cacheComponentMs | quote }}
+  {{- end }}
