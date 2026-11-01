@@ -46,6 +46,7 @@ data:
   {{- if and .Values.api.env.oauthIssuerUrl .Values.api.env.oauthConsentUrl }}
   OAUTH_ISSUER_URL: {{ .Values.api.env.oauthIssuerUrl | quote }}
   OAUTH_CONSENT_URL: {{ .Values.api.env.oauthConsentUrl | quote }}
+  OAUTH_ALLOWED_REDIRECT_HOSTS: {{ .Values.api.env.oauthAllowedRedirectHosts | quote }}
   {{- end }}
 
   # Switcher GitOps

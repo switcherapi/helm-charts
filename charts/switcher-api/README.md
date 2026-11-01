@@ -65,6 +65,7 @@ helm uninstall switcherapi --namespace switcherapi
 | `api.env.samlAcceptedClockSkewMs`     | SAML Accepted Clock Skew in ms                | 5000                  |
 | `api.env.oauthIssuerUrl`              | OAuth Issuer Public URL                       | ``                    |
 | `api.env.oauthConsentUrl`             | OAuth Consent Public URL                      | ``                    |
+| `api.env.oauthAllowedRedirectHosts`   | OAuth Allowed Redirect Hosts                  | ``                    |
 
 ### Resolver API parameters
 
