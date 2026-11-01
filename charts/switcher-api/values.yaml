@@ -47,6 +47,7 @@ api:
     # OAuth Integration
     oauthIssuerUrl: ""
     oauthConsentUrl: ""
+    oauthAllowedRedirectHosts: ""
 
   image:
     repository: trackerforce/switcher-api
