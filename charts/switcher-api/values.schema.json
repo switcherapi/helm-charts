@@ -124,6 +124,9 @@
                         "oauthConsentUrl": {
                             "type": "string"
                         },
+                        "oauthAllowedRedirectHosts": {
+                            "type": "string"
+                        },
                         "switcherApiLogger": {
                             "type": "boolean"
                         }
