@@ -1,0 +1,58 @@
+app:
+  replicaCount: 1
+  port: 8000
+
+  env:
+    switcherApiUrl: "https://switcherapi.com/api"
+    switcherApiInternalUrl: ""
+    switcherMcpTransport: "streamable-http"
+    switcherMcpHost: "0.0.0.0"
+    switcherMcpPort: 8000
+    switcherMcpPublicUrl: "http://127.0.0.1:8000"
+    switcherMcpWorkers: 4
+
+    # Enbale SSL
+    sslSecretName: ""
+    switcherApiCertPath: ""
+
+  image:
+    repository: trackerforce/switcher-mcp-server
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+  envFrom:
+  - configMapRef:
+      name: switcher-mcp-server
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  podAnnotations: {}
+
+  service:
+    type: ClusterIP
+    port: 8000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
