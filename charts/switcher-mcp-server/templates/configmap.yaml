@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: switcher-mcp-server
+  labels:
+    {{- include "switcher-mcp-server.labels" . | nindent 4 }}
+data:
+  SWITCHER_API_URL: {{ .Values.app.env.switcherApiUrl | quote }}
+  SWITCHER_API_INTERNAL_URL: {{ .Values.app.env.switcherApiInternalUrl | quote }}
+  SWITCHER_API_CERT_PATH: {{ .Values.app.env.switcherApiCertPath | quote }}
+  SWITCHER_MCP_TRANSPORT: {{ .Values.app.env.switcherMcpTransport | quote }}
+  SWITCHER_MCP_HOST: {{ .Values.app.env.switcherMcpHost | quote }}
+  SWITCHER_MCP_PORT: {{ .Values.app.env.switcherMcpPort | quote }}
+  SWITCHER_MCP_PUBLIC_URL: {{ .Values.app.env.switcherMcpPublicUrl | quote }}

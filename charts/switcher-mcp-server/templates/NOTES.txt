@@ -1,0 +1,16 @@
+Looks good!
+Test the installation with the steps below:
+
+1. Port-forward App service:
+
+    kubectl -n {{ .Release.Namespace }} port-forward svc/switcher-mcp-server {{ .Values.app.service.port }}:{{ .Values.app.service.port }} &
+
+2. Check pod health:
+
+    {{- if .Values.app.env.sslSecretName }}
+    https://localhost:{{ .Values.app.service.port }}/healthz
+    {{- else }}
+    http://localhost:{{ .Values.app.service.port }}/healthz
+    {{- end }}
+
+3. Happy Switcher MCP Server!
