@@ -15,7 +15,7 @@
 
 ***
 
-Switcher API Helm Charts provide a set of Helm charts for deploying the Switcher API and its related components in Kubernetes environments. These charts simplify the deployment and management of the Switcher API ecosystem, including the core API, resolver node, management interface, Slack app integration, and GitOps orchestrator.
+Switcher API Helm Charts provide a set of Helm charts for deploying the Switcher API and its related components in Kubernetes environments. These charts simplify the deployment and management of the Switcher API ecosystem, including the core API, resolver node, management interface, Slack app integration, GitOps orchestrator and MCP server.
 
 [Helm](https://helm.sh) must be installed to use the charts.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
@@ -52,3 +52,12 @@ helm repo add switcherapi https://switcherapi.github.io/helm-charts
 | Component | Description | Repository Link | Source Code |
 |-----------|-------------|-----------------|-------------|
 | Switcher GitOps | GitOps Domain Snapshot Orchestrator | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-gitops) | [GitHub](https://github.com/switcherapi/switcher-gitops) |
+
+# Switcher MCP Server Helm Charts
+
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/switcher-mcp-server)](https://artifacthub.io/packages/helm/switcherapi/switcher-mcp-server)
+[![Charts README](https://img.shields.io/badge/charts-README-blue.svg)](https://github.com/switcherapi/helm-charts/blob/master/charts/switcher-mcp-server/README.md)
+
+| Component | Description | Repository Link | Source Code |
+|-----------|-------------|-----------------|-------------|
+| Switcher MCP Server | Model Context Protocol Server for Switcher API | [Docker Hub](https://hub.docker.com/r/trackerforce/switcher-mcp-server) | [GitHub](https://github.com/switcherapi/switcher-mcp-server) |

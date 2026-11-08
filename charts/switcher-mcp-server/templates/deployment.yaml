@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: switcher-mcp-server
+  labels:
+    {{- include "switcher-mcp-server.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.app.autoscaling.enabled }}
+  replicas: {{ .Values.app.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "switcher-mcp-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.app.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "switcher-mcp-server.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.app.env.sslSecretName }}
+      volumes:
+        - name: secret-tls
+          secret:
+            secretName: {{ .Values.app.env.sslSecretName }}
+      {{- end }}
+      {{- with .Values.app.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.app.securityContext | nindent 12 }}
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.app.image.pullPolicy }}
+          {{- if .Values.app.env.sslSecretName }}
+          command: [
+            "uvicorn", "switcher_mcp_server.asgi:create_app",
+            "--factory",
+            "--host", "0.0.0.0",
+            "--port", "{{ .Values.app.port }}",
+            "--ssl-certfile=/etc/certs/tls.crt", "--ssl-keyfile=/etc/certs/tls.key",
+            "--workers", "{{ .Values.app.env.switcherMcpWorkers }}"]
+          {{- else }}
+          command: [
+            "uvicorn", "switcher_mcp_server.asgi:create_app",
+            "--factory",
+            "--host", "0.0.0.0",
+            "--port", "{{ .Values.app.port }}",
+            "--workers", "{{ .Values.app.env.switcherMcpWorkers }}"
+            ]
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.app.port }}
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+              {{- if .Values.app.env.sslSecretName }}
+              scheme: HTTPS
+              {{- else }}
+              scheme: HTTP
+              {{- end }}
+          resources:
+            {{- toYaml .Values.app.resources | nindent 12 }}
+          envFrom:
+            {{- with .Values.app.envFrom }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- if .Values.app.env.sslSecretName }}
+          volumeMounts:
+            - name: secret-tls
+              mountPath: /etc/certs
+              readOnly: true
+          {{- end }}
+      {{- with .Values.app.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.app.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.app.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
